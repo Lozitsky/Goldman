@@ -1,0 +1,119 @@
+JFDML JFormDesigner: "7.0.0.6.255" Java: "11.0.4" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :::p, comp panel1:::p::p, space ::27:x}}"
+			"$verticalGroup": "par l {seq l {comp panel1::::331:x, space :::p}}"
+		} ) {
+			name: "this"
+			"minimumSize": new java.awt.Dimension( 94, 38 )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {comp panel2:::p:299:p, space s:::p, comp panel3:::p:165:p, space ::14:x}}"
+				"$verticalGroup": "par l {seq {space :::p, par l {comp panel2::::305:x, comp panel3::::305:x}, space :p:20:p}}"
+			} ) {
+				name: "panel1"
+				"preferredSize": new java.awt.Dimension( 496, 322 )
+				"minimumSize": new java.awt.Dimension( 496, 322 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+					name: "panel2"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {seq l {space :p:24:p, par t:::p {comp label3::::110:x, comp label1::::110:x}, space :::p, par l {comp label2::l::0:x, comp label4:::::x}}, seq {space :::p, par l {comp jbtnSave:::p:147:p, comp jbtnExit::l:p:147:p}, space :0:12:x}, seq t {space ::14:x, comp jbtnLeft:::p:40:p, space u:::p, par l {seq l {par l {comp jbtnDown:::p:40:p, comp jbtnUp:::p:40:p}, space :p:53:p}, comp jbtnRight::t:p:40:p}, space :::p}}"
+					"$verticalGroup": "par l {seq {par l {seq l {space :p:46:p, par l {comp jbtnLeft:::p:40:p, comp jbtnRight:::p:40:p}}, seq l {comp jbtnUp:::p:40:p, space :51:51:p, comp jbtnDown:::p:40:p}}, space :p:18:p, par b {comp label1::b:p::p, comp label2::b:p::p}, space s:::p, par l {comp label4:::p::p, comp label3:::p::p}, space s:::p, comp jbtnSave:::p:33:p, space u:::p, comp jbtnExit:::p:33:p, space :::p}}"
+				} ) {
+					name: "panel3"
+					"preferredSize": new java.awt.Dimension( 166, 312 )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "jbtnUp"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/com/kirilo/game/images/up.png" )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jbtnUpActionPerformed", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "jbtnDown"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/com/kirilo/game/images/down.png" )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jbtnDownActionPerformed", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "jbtnLeft"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/com/kirilo/game/images/left.png" )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jbtnLeftActionPerformed", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "jbtnRight"
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/com/kirilo/game/images/right.png" )
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jbtnRightActionPerformed", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": "Number of points:"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label2"
+						"text": "0"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label3"
+						"text": "Steps left:"
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label4"
+						"text": "0"
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "jbtnSave"
+						"text": "Save"
+						"preferredSize": new java.awt.Dimension( 131, 24 )
+						"minimumSize": new java.awt.Dimension( 131, 24 )
+						"maximumSize": new java.awt.Dimension( 131, 24 )
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/com/kirilo/game/images/save.png" )
+						"horizontalAlignment": 2
+						"iconTextGap": 10
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jbtnSaveActionPerformed", true ) )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "jbtnExit"
+						"text": "Exit from game"
+						"preferredSize": new java.awt.Dimension( 131, 24 )
+						"minimumSize": new java.awt.Dimension( 131, 24 )
+						"maximumSize": new java.awt.Dimension( 131, 24 )
+						"icon": new com.jformdesigner.model.SwingIcon( 0, "/com/kirilo/game/images/exit.png" )
+						"horizontalAlignment": 2
+						"iconTextGap": 10
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jbtnExitActionPerformed", true ) )
+					} )
+				} )
+			} )
+			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
+				name: "menuBar1"
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu1"
+					"text": "File"
+					"minimumSize": new java.awt.Dimension( 41, 21 )
+					"maximumSize": new java.awt.Dimension( 41, 32767 )
+					"preferredSize": new java.awt.Dimension( 41, 21 )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem1"
+						"text": "Save game"
+					} )
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem2"
+						"text": "Exit game"
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+					name: "menu2"
+					"text": "Service"
+					add( new FormComponent( "javax.swing.JMenuItem" ) {
+						name: "menuItem3"
+						"text": "Statistics"
+					} )
+				} )
+			}
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 545, 395 )
+		} )
+	}
+}

@@ -1,0 +1,77 @@
+JFDML JFormDesigner: "7.0.0.6.255" Java: "11.0.4" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {space :p:17:p, comp jpanelMainMenu:::p:223:p, space :p:14:p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp jpanelMainMenu::::257:x, space :::p}}"
+		} ) {
+			name: "this"
+			"title": "Game"
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :::p, par t:::p {comp jbtnExit:::::x, comp jbtnLoadGame::l:::x, comp jbtnNewGame::l:::x, comp jbtnStatistics::l:::x}, space ::19:x}}"
+				"$verticalGroup": "par l {seq t {space :::x, comp jbtnNewGame:::p:52:p, space :::x, comp jbtnLoadGame:::p:52:p, space :::x, comp jbtnStatistics:::p:52:p, space :::x, comp jbtnExit:::p:52:p, space :::x}}"
+			} ) {
+				name: "jpanelMainMenu"
+				"border": new javax.swing.border.EmptyBorder( 0, 0, 0, 0 )
+				"preferredSize": new java.awt.Dimension( 230, 246 )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "jbtnExit"
+					"text": "Exit"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/com/kirilo/game/images/exit.png" )
+					"horizontalAlignment": 2
+					"font": new java.awt.Font( "Comic Sans MS", 0, 18 )
+					"preferredSize": new java.awt.Dimension( 198, 34 )
+					"minimumSize": new java.awt.Dimension( 198, 34 )
+					"maximumSize": new java.awt.Dimension( 198, 34 )
+					"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, true )
+					"iconTextGap": 10
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jbtnExitActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "jbtnStatistics"
+					"text": "Statistics"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/com/kirilo/game/images/stat.png" )
+					"horizontalAlignment": 2
+					"font": new java.awt.Font( "Comic Sans MS", 0, 18 )
+					"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, true )
+					"minimumSize": new java.awt.Dimension( 198, 34 )
+					"maximumSize": new java.awt.Dimension( 198, 34 )
+					"iconTextGap": 10
+					"preferredSize": new java.awt.Dimension( 198, 34 )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jbtnStatisticsActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "jbtnLoadGame"
+					"text": "Download game"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/com/kirilo/game/images/load.png" )
+					"font": new java.awt.Font( "Comic Sans MS", 0, 18 )
+					"horizontalAlignment": 2
+					"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, true )
+					"iconTextGap": 10
+					"maximumSize": new java.awt.Dimension( 198, 34 )
+					"minimumSize": new java.awt.Dimension( 198, 34 )
+					"preferredSize": new java.awt.Dimension( 198, 34 )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jbtnLoadGameActionPerformed", true ) )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "jbtnNewGame"
+					"text": "New game"
+					"icon": new com.jformdesigner.model.SwingIcon( 0, "/com/kirilo/game/images/new.png" )
+					"font": new java.awt.Font( "Comic Sans MS", 0, 18 )
+					"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
+					"preferredSize": new java.awt.Dimension( 198, 34 )
+					"maximumSize": new java.awt.Dimension( 198, 34 )
+					"minimumSize": new java.awt.Dimension( 198, 34 )
+					"iconTextGap": 10
+					"horizontalAlignment": 2
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jbtnNewGameActionPerformed", true ) )
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 195, 45 )
+			"size": new java.awt.Dimension( 270, 305 )
+		} )
+	}
+}
