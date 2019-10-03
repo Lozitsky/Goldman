@@ -1,6 +1,6 @@
-package com.kirilo.game.objects.common;
+package com.kirilo.game.abstracts;
 
-import com.kirilo.game.objects.interfaces.MovingObject;
+import com.kirilo.game.interfaces.MovingObject;
 
 import javax.swing.*;
 
@@ -8,6 +8,23 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
     private ImageIcon iconLeft;
     private ImageIcon iconRight;
     private ImageIcon iconUp;
+
+    public void setIconLeft(ImageIcon iconLeft) {
+        this.iconLeft = iconLeft;
+    }
+
+    public void setIconRight(ImageIcon iconRight) {
+        this.iconRight = iconRight;
+    }
+
+    public void setIconUp(ImageIcon iconUp) {
+        this.iconUp = iconUp;
+    }
+
+    public void setIconDown(ImageIcon iconDown) {
+        this.iconDown = iconDown;
+    }
+
     private ImageIcon iconDown;
 
     @Override

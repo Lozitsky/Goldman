@@ -1,9 +1,11 @@
-package com.kirilo.game.objects.common;
+package com.kirilo.game.abstracts;
 
 import com.kirilo.game.enums.GameObjectType;
-import com.kirilo.game.objects.interfaces.StaticObject;
+import com.kirilo.game.interfaces.StaticObject;
+import com.kirilo.game.objects.Coordinate;
 
 import javax.swing.*;
+import java.util.Objects;
 
 public abstract class AbstractGameObject implements StaticObject {
     private GameObjectType type;
@@ -44,5 +46,27 @@ public abstract class AbstractGameObject implements StaticObject {
     @Override
     public void setIcon(ImageIcon icon) {
         this.icon = icon;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AbstractGameObject)) return false;
+        AbstractGameObject that = (AbstractGameObject) o;
+        return type == that.type &&
+                coordinate.equals(that.coordinate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, coordinate);
+    }
+
+    @Override
+    public String toString() {
+        return "AbstractGameObject{" +
+                "type=" + type +
+                ", coordinate=" + coordinate +
+                '}';
     }
 }

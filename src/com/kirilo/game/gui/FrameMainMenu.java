@@ -52,12 +52,18 @@ public class FrameMainMenu extends JFrame {
         {
             jpanelMainMenu.setBorder(BorderFactory.createEmptyBorder());
             jpanelMainMenu.setPreferredSize(new Dimension(230, 246));
-            jpanelMainMenu.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing.
-            border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER
-            , javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font
-            .BOLD ,12 ), java. awt. Color. red) ,jpanelMainMenu. getBorder( )) ); jpanelMainMenu. addPropertyChangeListener (
-            new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072"
-            .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            jpanelMainMenu.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.
+                    border.EmptyBorder(0, 0, 0, 0), "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax.swing.border.TitledBorder.CENTER
+                    , javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialo\u0067", java.awt.Font
+                    .BOLD, 12), java.awt.Color.red), jpanelMainMenu.getBorder()));
+            jpanelMainMenu.addPropertyChangeListener(
+                    new java.beans.PropertyChangeListener() {
+                        @Override
+                        public void propertyChange(java.beans.PropertyChangeEvent e) {
+                            if ("borde\u0072"
+                                    .equals(e.getPropertyName())) throw new RuntimeException();
+                        }
+                    });
 
             //---- jbtnExit ----
             jbtnExit.setText("Exit");
@@ -110,46 +116,46 @@ public class FrameMainMenu extends JFrame {
             GroupLayout jpanelMainMenuLayout = new GroupLayout(jpanelMainMenu);
             jpanelMainMenu.setLayout(jpanelMainMenuLayout);
             jpanelMainMenuLayout.setHorizontalGroup(
-                jpanelMainMenuLayout.createParallelGroup()
-                    .addGroup(jpanelMainMenuLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jpanelMainMenuLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jbtnExit, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbtnLoadGame, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbtnNewGame, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jbtnStatistics, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(19, Short.MAX_VALUE))
+                    jpanelMainMenuLayout.createParallelGroup()
+                            .addGroup(jpanelMainMenuLayout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(jpanelMainMenuLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jbtnExit, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jbtnLoadGame, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jbtnNewGame, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jbtnStatistics, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addContainerGap(19, Short.MAX_VALUE))
             );
             jpanelMainMenuLayout.setVerticalGroup(
-                jpanelMainMenuLayout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, jpanelMainMenuLayout.createSequentialGroup()
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnNewGame, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnLoadGame, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnStatistics, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtnExit, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    jpanelMainMenuLayout.createParallelGroup()
+                            .addGroup(GroupLayout.Alignment.TRAILING, jpanelMainMenuLayout.createSequentialGroup()
+                                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbtnNewGame, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbtnLoadGame, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbtnStatistics, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbtnExit, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
+                                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
         }
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                    .addGap(17, 17, 17)
-                    .addComponent(jpanelMainMenu, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)
-                    .addGap(14, 14, 14))
+                contentPaneLayout.createParallelGroup()
+                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jpanelMainMenu, GroupLayout.PREFERRED_SIZE, 223, GroupLayout.PREFERRED_SIZE)
+                                .addGap(14, 14, 14))
         );
         contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jpanelMainMenu, GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                    .addContainerGap())
+                contentPaneLayout.createParallelGroup()
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jpanelMainMenu, GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                                .addContainerGap())
         );
         pack();
         setLocationRelativeTo(getOwner());

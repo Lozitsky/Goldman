@@ -1,8 +1,8 @@
-package com.kirilo.game.objects.interfaces;
+package com.kirilo.game.interfaces;
 
 
 import com.kirilo.game.enums.GameObjectType;
-import com.kirilo.game.objects.common.Coordinate;
+import com.kirilo.game.objects.Coordinate;
 
 import javax.swing.*;
 

@@ -1,4 +1,4 @@
-package com.kirilo.game.objects.common;
+package com.kirilo.game.objects;
 
 import java.io.Serializable;
 import java.util.Objects;

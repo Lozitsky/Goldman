@@ -32,7 +32,7 @@ public abstract class BaseFrame extends JFrame {
 
     protected void setCloseOperation() {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter(){
+        addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 closeFrame();

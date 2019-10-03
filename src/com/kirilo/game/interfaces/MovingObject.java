@@ -1,8 +1,8 @@
-package com.kirilo.game.objects.interfaces;
+package com.kirilo.game.interfaces;
 
 
+import com.kirilo.game.abstracts.AbstractGameObject;
 import com.kirilo.game.enums.MovingDirection;
-import com.kirilo.game.objects.common.AbstractGameObject;
 
 import javax.swing.*;
 

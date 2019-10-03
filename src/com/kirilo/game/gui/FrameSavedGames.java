@@ -42,15 +42,15 @@ public class FrameSavedGames extends BaseFrame {
 
             //---- table1 ----
             table1.setModel(new DefaultTableModel(
-                new Object[][] {
-                    {null, null, " ", null},
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null},
-                },
-                new String[] {
-                    "Title 1", "Title 2", "Title 3", "Title 4"
-                }
+                    new Object[][]{
+                            {null, null, " ", null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                    },
+                    new String[]{
+                            "Title 1", "Title 2", "Title 3", "Title 4"
+                    }
             ));
             scrollPane1.setViewportView(table1);
         }
@@ -67,33 +67,33 @@ public class FrameSavedGames extends BaseFrame {
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(contentPaneLayout.createParallelGroup()
-                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
+                contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addComponent(jbtnReturn)
-                            .addContainerGap(531, Short.MAX_VALUE))))
-                .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                    .addContainerGap(411, Short.MAX_VALUE)
-                    .addComponent(button2, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(button3, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
-                    .addGap(9, 9, 9))
+                                .addContainerGap()
+                                .addGroup(contentPaneLayout.createParallelGroup()
+                                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
+                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                                .addComponent(jbtnReturn)
+                                                .addContainerGap(531, Short.MAX_VALUE))))
+                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
+                                .addContainerGap(411, Short.MAX_VALUE)
+                                .addComponent(button2, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(button3, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
+                                .addGap(9, 9, 9))
         );
         contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jbtnReturn, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(button3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(button2))
-                    .addGap(40, 40, 40))
+                contentPaneLayout.createParallelGroup()
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jbtnReturn, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 266, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(contentPaneLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(button3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(button2))
+                                .addGap(40, 40, 40))
         );
         pack();
         setLocationRelativeTo(getOwner());

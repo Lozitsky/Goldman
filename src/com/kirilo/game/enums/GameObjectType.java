@@ -13,7 +13,7 @@ public enum GameObjectType implements Serializable {
 
     private int priority;
 
-    private GameObjectType(int priority) {
+    GameObjectType(int priority) {
         this.priority = priority;
     }
 

@@ -34,15 +34,15 @@ public class FrameStatus extends BaseFrame {
 
             //---- table1 ----
             table1.setModel(new DefaultTableModel(
-                new Object[][] {
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null},
-                },
-                new String[] {
-                    "Title 1", "Title 2", "Title 3", "Title 4"
-                }
+                    new Object[][]{
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                            {null, null, null, null},
+                    },
+                    new String[]{
+                            "Title 1", "Title 2", "Title 3", "Title 4"
+                    }
             ));
             scrollPane1.setViewportView(table1);
         }
@@ -50,24 +50,24 @@ public class FrameStatus extends BaseFrame {
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(contentPaneLayout.createParallelGroup()
-                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
+                contentPaneLayout.createParallelGroup()
                         .addGroup(contentPaneLayout.createSequentialGroup()
-                            .addComponent(button)
-                            .addGap(0, 645, Short.MAX_VALUE)))
-                    .addContainerGap())
+                                .addContainerGap()
+                                .addGroup(contentPaneLayout.createParallelGroup()
+                                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
+                                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                                .addComponent(button)
+                                                .addGap(0, 645, Short.MAX_VALUE)))
+                                .addContainerGap())
         );
         contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(button)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(30, Short.MAX_VALUE))
+                contentPaneLayout.createParallelGroup()
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(button)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(30, Short.MAX_VALUE))
         );
         pack();
         setLocationRelativeTo(getOwner());
