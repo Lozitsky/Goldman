@@ -10,15 +10,52 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 
-public class AbstractGameMap implements GameMap, Serializable {
+public abstract class AbstractGameMap implements GameMap, Serializable {
     private static final long serialVersionUID = -6588926659509137481L;
     private int width;
-    private int height;
+    private long height;
     private int timeLimit;
+    private String name;
     private boolean isExitExist;
     private boolean isGoldManExist;
     private HashMap<Coordinate, AbstractGameObject> gameObjects = new HashMap<>();
     private EnumMap<GameObjectType, ArrayList<AbstractGameObject>> typeObjects = new EnumMap<>(GameObjectType.class);
+
+    public void addGameObject(AbstractGameObject gameObject) {
+        gameObjects.put(gameObject.getCoordinate(), gameObject);
+        ArrayList<AbstractGameObject> list = typeObjects.get(gameObject.getType());
+
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+
+        list.add(gameObject);
+        typeObjects.put(gameObject.getType(), list);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isExitExist() {
+        return isExitExist;
+    }
+
+    public void setExitExist(boolean exitExist) {
+        isExitExist = exitExist;
+    }
+
+    public boolean isGoldManExist() {
+        return isGoldManExist;
+    }
+
+    public void setGoldManExist(boolean goldManExist) {
+        isGoldManExist = goldManExist;
+    }
 
     @Override
     public int getWidth() {
@@ -30,11 +67,11 @@ public class AbstractGameMap implements GameMap, Serializable {
     }
 
     @Override
-    public int getHeight() {
+    public long getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(long height) {
         this.height = height;
     }
 
@@ -45,21 +82,6 @@ public class AbstractGameMap implements GameMap, Serializable {
 
     public void setTimeLimit(int timeLimit) {
         this.timeLimit = timeLimit;
-    }
-
-    @Override
-    public boolean loadMap() {
-        return false;
-    }
-
-    @Override
-    public boolean saveMap() {
-        return false;
-    }
-
-    @Override
-    public boolean drawMap() {
-        return false;
     }
 
     public AbstractGameObject getPriorityObject(AbstractGameObject firstObject, AbstractGameObject secondObject) {

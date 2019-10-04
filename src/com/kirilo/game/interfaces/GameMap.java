@@ -1,15 +1,15 @@
 package com.kirilo.game.interfaces;
 
 public interface GameMap {
-    int getHeight();
+    long getHeight();
 
     int getWidth();
 
     int getTimeLimit();
 
-    boolean loadMap();
+    boolean loadMap(Object source);
 
-    boolean saveMap();
+    boolean saveMap(Object source);
 
     boolean drawMap();
 }

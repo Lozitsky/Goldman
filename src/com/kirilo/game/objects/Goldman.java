@@ -13,10 +13,10 @@ public class Goldman extends AbstractMovingObject {
     public Goldman(Coordinate coordinate) {
         setType(GameObjectType.GOLDMAN);
         setCoordinate(coordinate);
-        setIconUp(getImageIcon("/com/kirilo/game/images/goldman_up.png"));
-        setIconDown(getImageIcon("/com/kirilo/game/images/goldman_down.png"));
-        setIconLeft(getImageIcon("/com/kirilo/game/images/goldman_left.png"));
-        setIconRight(getImageIcon("/com/kirilo/game/images/goldman_right.png"));
+        setIconUp(getImageIcon("com/kirilo/game/images/goldman_up.png"));
+        setIconDown(getImageIcon("com/kirilo/game/images/goldman_down.png"));
+        setIconLeft(getImageIcon("com/kirilo/game/images/goldman_left.png"));
+        setIconRight(getImageIcon("com/kirilo/game/images/goldman_right.png"));
 
         setIcon(getIconUp());
     }

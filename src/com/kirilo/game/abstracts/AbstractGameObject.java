@@ -6,15 +6,18 @@ import com.kirilo.game.objects.Coordinate;
 
 import javax.swing.*;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class AbstractGameObject implements StaticObject {
     private GameObjectType type;
     private Coordinate coordinate;
-    private ImageIcon icon = getImageIcon("/com/kirilo/game/images/noicon.png");
+    private ImageIcon icon = getImageIcon("com/kirilo/game/images/noicon.png");
 
 
     protected ImageIcon getImageIcon(String path) {
-        return new ImageIcon(getClass().getResource(path));
+        Logger.getLogger(AbstractGameObject.class.getName()).log(Level.INFO, path);
+        return new ImageIcon(path != null ? getClass().getClassLoader().getResource(path).getPath() : null);
     }
 
     @Override

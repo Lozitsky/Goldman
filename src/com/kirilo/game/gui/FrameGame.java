@@ -1,12 +1,19 @@
 package com.kirilo.game.gui;
 
+import com.kirilo.game.interfaces.GameMap;
+import com.kirilo.game.objects.maps.FSGameMap;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class FrameGame extends BaseFrame {
+
+    private GameMap gameMap = new FSGameMap();
+
     public FrameGame() throws HeadlessException {
         initComponents();
+        gameMap.loadMap(getClass().getClassLoader().getResource("/game.map"));
     }
 
     private void jbtnSaveActionPerformed(ActionEvent e) {

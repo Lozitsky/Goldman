@@ -17,6 +17,6 @@ public class Treasure extends AbstractGameObject {
     public Treasure(Coordinate coordinate) {
         setType(GameObjectType.TREASURE);
         setCoordinate(coordinate);
-        setIcon(getImageIcon("/com/kirilo/game/images/gold.png"));
+        setIcon(getImageIcon("com/kirilo/game/images/gold.png"));
     }
 }

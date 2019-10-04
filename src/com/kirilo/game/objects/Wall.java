@@ -7,6 +7,6 @@ public class Wall extends AbstractGameObject {
     public Wall(Coordinate coordinate) {
         setType(GameObjectType.WALL);
         setCoordinate(coordinate);
-        setIcon(getImageIcon("/com/kirilo/game/images/wall.png"));
+        setIcon(getImageIcon("com/kirilo/game/images/wall.png"));
     }
 }

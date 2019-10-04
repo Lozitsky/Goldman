@@ -10,10 +10,10 @@ public class Monster extends AbstractMovingObject {
     public Monster(Coordinate coordinate) {
         setType(GameObjectType.MONSTER);
         setCoordinate(coordinate);
-        setIconUp(getImageIcon("/com/kirilo/game/images/monster_up.jpg"));
-        setIconDown(getImageIcon("/com/kirilo/game/images/monster_down.jpg"));
-        setIconLeft(getImageIcon("/com/kirilo/game/images/monster_left.jpg"));
-        setIconRight(getImageIcon("/com/kirilo/game/images/monster_right.jpg"));
+        setIconUp(getImageIcon("com/kirilo/game/images/monster_up.jpg"));
+        setIconDown(getImageIcon("com/kirilo/game/images/monster_down.jpg"));
+        setIconLeft(getImageIcon("com/kirilo/game/images/monster_left.jpg"));
+        setIconRight(getImageIcon("com/kirilo/game/images/monster_right.jpg"));
         setIcon(getIconUp());
     }
 

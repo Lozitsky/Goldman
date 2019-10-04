@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class FrameMainMenu extends JFrame {
-    private BaseFrame frameGame = new FrameGame();
+    private BaseFrame frameGame;
     private BaseFrame frameStatus = new FrameStatus();
     private BaseFrame frameSavedGames = new FrameSavedGames();
 
@@ -16,6 +16,7 @@ public class FrameMainMenu extends JFrame {
     }
 
     private void jbtnNewGameActionPerformed(ActionEvent e) {
+        frameGame = new FrameGame();
         frameGame.showFrame(this);
     }
 
