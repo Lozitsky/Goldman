@@ -1,7 +1,6 @@
 package com.kirilo.game.gui;
 
-import com.kirilo.game.interfaces.GameMap;
-import com.kirilo.game.objects.maps.FSGameMap;
+import com.kirilo.game.interfaces.maps.DrawableMap;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,11 +8,20 @@ import java.awt.event.ActionEvent;
 
 public class FrameGame extends BaseFrame {
 
-    private GameMap gameMap = new FSGameMap();
+    //    private GameMap gameMap = new FSGameMap();
+    private DrawableMap gameMap;
 
     public FrameGame() throws HeadlessException {
         initComponents();
-        gameMap.loadMap(getClass().getClassLoader().getResource("/game.map"));
+//        gameMap.loadMap(getClass().getClassLoader().getResource("/game.map"));
+    }
+
+    public void setGameMap(DrawableMap gameMap) {
+        this.gameMap = gameMap;
+        gameMap.drawMap();
+
+        panelMap.removeAll();
+        panelMap.add(gameMap.getMap());
     }
 
     private void jbtnSaveActionPerformed(ActionEvent e) {
@@ -50,7 +58,7 @@ public class FrameGame extends BaseFrame {
         menu2 = new JMenu();
         menuItem3 = new JMenuItem();
         panel1 = new JPanel();
-        panel2 = new JPanel();
+        panelMap = new JPanel();
         panel3 = new JPanel();
         jbtnUp = new JButton();
         jbtnDown = new JButton();
@@ -103,24 +111,17 @@ public class FrameGame extends BaseFrame {
         {
             panel1.setPreferredSize(new Dimension(496, 322));
             panel1.setMinimumSize(new Dimension(496, 322));
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(
-                    new javax.swing.border.EmptyBorder(0, 0, 0, 0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion"
-                    , javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BOTTOM
-                    , new java.awt.Font("D\u0069alog", java.awt.Font.BOLD, 12)
-                    , java.awt.Color.red), panel1.getBorder()));
-            panel1.addPropertyChangeListener(
-                    new java.beans.PropertyChangeListener() {
-                        @Override
-                        public void propertyChange(java.beans.PropertyChangeEvent e
-                        ) {
-                            if ("\u0062order".equals(e.getPropertyName())) throw new RuntimeException()
-                                    ;
-                        }
-                    });
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax
+            . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e" , javax. swing
+            .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .
+            Font ( "Dialo\u0067", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red
+            ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override
+            public void propertyChange (java . beans. PropertyChangeEvent e) { if( "borde\u0072" .equals ( e. getPropertyName (
+            ) ) )throw new RuntimeException( ) ;} } );
 
-            //======== panel2 ========
+            //======== panelMap ========
             {
-                panel2.setLayout(new BorderLayout());
+                panelMap.setLayout(new BorderLayout());
             }
 
             //======== panel3 ========
@@ -178,99 +179,99 @@ public class FrameGame extends BaseFrame {
                 GroupLayout panel3Layout = new GroupLayout(panel3);
                 panel3.setLayout(panel3Layout);
                 panel3Layout.setHorizontalGroup(
-                        panel3Layout.createParallelGroup()
+                    panel3Layout.createParallelGroup()
+                        .addGroup(panel3Layout.createSequentialGroup()
+                            .addGap(24, 24, 24)
+                            .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(label3, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                                .addComponent(label1, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(panel3Layout.createParallelGroup()
+                                .addComponent(label2, GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
+                                .addComponent(label4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(panel3Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addGroup(panel3Layout.createParallelGroup()
+                                .addComponent(jbtnSave, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbtnExit, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE))
+                            .addGap(0, 12, Short.MAX_VALUE))
+                        .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                            .addContainerGap(14, Short.MAX_VALUE)
+                            .addComponent(jbtnLeft, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(panel3Layout.createParallelGroup()
                                 .addGroup(panel3Layout.createSequentialGroup()
-                                        .addGap(24, 24, 24)
-                                        .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(label3, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                                                .addComponent(label1, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panel3Layout.createParallelGroup()
-                                                .addComponent(label2, GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
-                                                .addComponent(label4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGroup(panel3Layout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addGroup(panel3Layout.createParallelGroup()
-                                                .addComponent(jbtnSave, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jbtnExit, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 12, Short.MAX_VALUE))
-                                .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
-                                        .addContainerGap(14, Short.MAX_VALUE)
-                                        .addComponent(jbtnLeft, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(panel3Layout.createParallelGroup()
-                                                .addGroup(panel3Layout.createSequentialGroup()
-                                                        .addGroup(panel3Layout.createParallelGroup()
-                                                                .addComponent(jbtnDown, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(jbtnUp, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-                                                        .addGap(53, 53, 53))
-                                                .addComponent(jbtnRight, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
-                                        .addContainerGap())
+                                    .addGroup(panel3Layout.createParallelGroup()
+                                        .addComponent(jbtnDown, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jbtnUp, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                                    .addGap(53, 53, 53))
+                                .addComponent(jbtnRight, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE))
+                            .addContainerGap())
                 );
                 panel3Layout.setVerticalGroup(
-                        panel3Layout.createParallelGroup()
+                    panel3Layout.createParallelGroup()
+                        .addGroup(panel3Layout.createSequentialGroup()
+                            .addGroup(panel3Layout.createParallelGroup()
                                 .addGroup(panel3Layout.createSequentialGroup()
-                                        .addGroup(panel3Layout.createParallelGroup()
-                                                .addGroup(panel3Layout.createSequentialGroup()
-                                                        .addGap(46, 46, 46)
-                                                        .addGroup(panel3Layout.createParallelGroup()
-                                                                .addComponent(jbtnLeft, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(jbtnRight, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
-                                                .addGroup(panel3Layout.createSequentialGroup()
-                                                        .addComponent(jbtnUp, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(51, 51, 51)
-                                                        .addComponent(jbtnDown, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                .addComponent(label1)
-                                                .addComponent(label2))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(panel3Layout.createParallelGroup()
-                                                .addComponent(label4)
-                                                .addComponent(label3))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jbtnSave, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jbtnExit, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap())
+                                    .addGap(46, 46, 46)
+                                    .addGroup(panel3Layout.createParallelGroup()
+                                        .addComponent(jbtnLeft, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jbtnRight, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(panel3Layout.createSequentialGroup()
+                                    .addComponent(jbtnUp, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(51, 51, 51)
+                                    .addComponent(jbtnDown, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)))
+                            .addGap(18, 18, 18)
+                            .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(label1)
+                                .addComponent(label2))
+                            .addGap(18, 18, 18)
+                            .addGroup(panel3Layout.createParallelGroup()
+                                .addComponent(label4)
+                                .addComponent(label3))
+                            .addGap(18, 18, 18)
+                            .addComponent(jbtnSave, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jbtnExit, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap())
                 );
             }
 
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
-                    panel1Layout.createParallelGroup()
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                    .addComponent(panel2, GroupLayout.PREFERRED_SIZE, 299, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(panel3, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
-                                    .addContainerGap(14, Short.MAX_VALUE))
+                panel1Layout.createParallelGroup()
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addComponent(panelMap, GroupLayout.PREFERRED_SIZE, 299, GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(panel3, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(14, Short.MAX_VALUE))
             );
             panel1Layout.setVerticalGroup(
-                    panel1Layout.createParallelGroup()
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(panel1Layout.createParallelGroup()
-                                            .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                                            .addComponent(panel3, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
-                                    .addGap(20, 20, 20))
+                panel1Layout.createParallelGroup()
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panel1Layout.createParallelGroup()
+                            .addComponent(panelMap, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                            .addComponent(panel3, GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
+                        .addGap(20, 20, 20))
             );
         }
 
         GroupLayout contentPaneLayout = new GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
-                contentPaneLayout.createParallelGroup()
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(27, Short.MAX_VALUE))
+            contentPaneLayout.createParallelGroup()
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(panel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(27, Short.MAX_VALUE))
         );
         contentPaneLayout.setVerticalGroup(
-                contentPaneLayout.createParallelGroup()
-                        .addGroup(contentPaneLayout.createSequentialGroup()
-                                .addComponent(panel1, GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
-                                .addContainerGap())
+            contentPaneLayout.createParallelGroup()
+                .addGroup(contentPaneLayout.createSequentialGroup()
+                    .addComponent(panel1, GroupLayout.DEFAULT_SIZE, 331, Short.MAX_VALUE)
+                    .addContainerGap())
         );
         pack();
         setLocationRelativeTo(getOwner());
@@ -286,7 +287,7 @@ public class FrameGame extends BaseFrame {
     private JMenu menu2;
     private JMenuItem menuItem3;
     private JPanel panel1;
-    private JPanel panel2;
+    private JPanel panelMap;
     private JPanel panel3;
     private JButton jbtnUp;
     private JButton jbtnDown;

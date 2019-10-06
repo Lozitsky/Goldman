@@ -1,14 +1,18 @@
 package com.kirilo.game.gui;
 
+import com.kirilo.game.enums.LocationType;
+import com.kirilo.game.gui.maps.JTableGameMap;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class FrameMainMenu extends JFrame {
-    private BaseFrame frameGame;
+    private FrameGame frameGame;
     private BaseFrame frameStatus = new FrameStatus();
     private BaseFrame frameSavedGames = new FrameSavedGames();
+    private JTableGameMap gameMap = new JTableGameMap(LocationType.FS, "game.map");
 
     public FrameMainMenu() throws HeadlessException {
         initComponents();
@@ -16,7 +20,10 @@ public class FrameMainMenu extends JFrame {
     }
 
     private void jbtnNewGameActionPerformed(ActionEvent e) {
-        frameGame = new FrameGame();
+        if (frameGame == null) {
+            frameGame = new FrameGame();
+        }
+        frameGame.setGameMap(gameMap);
         frameGame.showFrame(this);
     }
 

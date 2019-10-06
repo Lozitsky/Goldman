@@ -1,19 +1,16 @@
 package com.kirilo.game.abstracts;
 
 import com.kirilo.game.enums.GameObjectType;
-import com.kirilo.game.interfaces.GameMap;
+import com.kirilo.game.interfaces.maps.GameMap;
 import com.kirilo.game.objects.Coordinate;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public abstract class AbstractGameMap implements GameMap, Serializable {
     private static final long serialVersionUID = -6588926659509137481L;
     private int width;
-    private long height;
+    private int height;
     private int timeLimit;
     private String name;
     private boolean isExitExist;
@@ -67,11 +64,11 @@ public abstract class AbstractGameMap implements GameMap, Serializable {
     }
 
     @Override
-    public long getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(long height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
@@ -92,8 +89,12 @@ public abstract class AbstractGameMap implements GameMap, Serializable {
         return isExitExist && isGoldManExist;
     }
 
-    public List<AbstractGameObject> getObjects(GameObjectType type) {
+    public List<AbstractGameObject> getGameObjects(GameObjectType type) {
         return typeObjects.get(type);
+    }
+
+    public Collection<AbstractGameObject> getAllGameObjects() {
+        return gameObjects.values();
     }
 
     public AbstractGameObject getObjectByCoordinate(Coordinate coordinate) {

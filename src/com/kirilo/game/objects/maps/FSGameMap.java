@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FSGameMap extends AbstractGameMap {
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Override
     public boolean loadMap(Object source) {
@@ -23,7 +24,7 @@ public class FSGameMap extends AbstractGameMap {
             throw new IllegalArgumentException("File must not be empty! " + file.getPath());
         }
 
-        setHeight(getLineCount(file));
+        setHeight((int) getLineCount(file));
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String[] firstString = reader.readLine().trim().split(",");
@@ -41,16 +42,24 @@ public class FSGameMap extends AbstractGameMap {
             });
             return true;
         } catch (FileNotFoundException e) {
-            Logger.getLogger(FSGameMap.class.getName()).log(Level.SEVERE, "file not found", e);
+            logger.log(Level.SEVERE, "file not found", e);
         } catch (IOException e) {
-            Logger.getLogger(FSGameMap.class.getName()).log(Level.SEVERE, e.getClass().getName(), e);
+            logger.log(Level.SEVERE, e.getClass().getName(), e);
         }
         return false;
     }
 
     private void createGameObject(String type, Coordinate coordinate) {
         GameObjectType objectType = GameObjectType.valueOf(type.toUpperCase());
-        AbstractGameObject gameObject = GameObjectCreator.getInstance().createObject(objectType, coordinate);
+//        AbstractGameObject gameObject = ((GameObjectCreator)AbstractObjectCreator.getInstance().apply(GameObjectCreator.class.getName())).createObject(objectType, coordinate);
+
+//        Singleton<GameObjectCreator> instance = AbstractObjectCreator.getInstance();
+
+//        AbstractGameObject gameObject = (instance.getSingleton()).createObject(objectType, coordinate);
+        AbstractGameObject gameObject = new GameObjectCreator().getSingleton().createObject(objectType, coordinate);
+
+//        AbstractGameObject gameObject = singleton.createObject(objectType, coordinate);
+
         addGameObject(gameObject);
 
         switch (gameObject.getType()) {
@@ -68,18 +77,13 @@ public class FSGameMap extends AbstractGameMap {
         return false;
     }
 
-    @Override
-    public boolean drawMap() {
-        return false;
-    }
-
     private long getLineCount(File file) {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             return reader.lines().count() - 1;
         } catch (FileNotFoundException e) {
-            Logger.getLogger(FSGameMap.class.getName()).log(Level.SEVERE, "file not found", e);
+            logger.log(Level.SEVERE, "file not found", e);
         } catch (IOException e) {
-            Logger.getLogger(FSGameMap.class.getName()).log(Level.SEVERE, e.getClass().getName(), e);
+            logger.log(Level.SEVERE, e.getClass().getName(), e);
         }
         return 0;
     }

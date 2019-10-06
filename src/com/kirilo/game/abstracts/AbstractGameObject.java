@@ -13,16 +13,17 @@ public abstract class AbstractGameObject implements StaticObject {
     private GameObjectType type;
     private Coordinate coordinate;
     private ImageIcon icon = getImageIcon("com/kirilo/game/images/noicon.png");
+    private static Logger logger = Logger.getLogger(AbstractGameObject.class.getName());
 
 
     protected ImageIcon getImageIcon(String path) {
-        Logger.getLogger(AbstractGameObject.class.getName()).log(Level.INFO, path);
+//        logger = Logger.getLogger(this.getClass().getName());
+        logger.log(Level.INFO, path);
         return new ImageIcon(path != null ? getClass().getClassLoader().getResource(path).getPath() : null);
     }
 
     @Override
     public GameObjectType getType() {
-
         return type;
     }
 

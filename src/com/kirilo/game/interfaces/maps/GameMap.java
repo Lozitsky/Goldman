@@ -1,7 +1,7 @@
-package com.kirilo.game.interfaces;
+package com.kirilo.game.interfaces.maps;
 
 public interface GameMap {
-    long getHeight();
+    int getHeight();
 
     int getWidth();
 
@@ -11,5 +11,4 @@ public interface GameMap {
 
     boolean saveMap(Object source);
 
-    boolean drawMap();
 }

@@ -10,14 +10,14 @@ new FormModel {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 94, 38 )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {comp panel2:::p:299:p, space s:::p, comp panel3:::p:165:p, space ::14:x}}"
-				"$verticalGroup": "par l {seq {space :::p, par l {comp panel2::::305:x, comp panel3::::305:x}, space :p:20:p}}"
+				"$horizontalGroup": "par l {seq l {comp panelMap:::p:299:p, space s:::p, comp panel3:::p:165:p, space ::14:x}}"
+				"$verticalGroup": "par l {seq {space :::p, par l {comp panelMap::::305:x, comp panel3::::305:x}, space :p:20:p}}"
 			} ) {
 				name: "panel1"
 				"preferredSize": new java.awt.Dimension( 496, 322 )
 				"minimumSize": new java.awt.Dimension( 496, 322 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
-					name: "panel2"
+					name: "panelMap"
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 					"$horizontalGroup": "par l {seq l {space :p:24:p, par t:::p {comp label3::::110:x, comp label1::::110:x}, space :::p, par l {comp label2::l::0:x, comp label4:::::x}}, seq {space :::p, par l {comp jbtnSave:::p:147:p, comp jbtnExit::l:p:147:p}, space :0:12:x}, seq t {space ::14:x, comp jbtnLeft:::p:40:p, space u:::p, par l {seq l {par l {comp jbtnDown:::p:40:p, comp jbtnUp:::p:40:p}, space :p:53:p}, comp jbtnRight::t:p:40:p}, space :::p}}"
