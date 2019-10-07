@@ -1,5 +1,9 @@
 package com.kirilo.game.gui;
 
+import com.kirilo.game.abstracts.AbstractGameObject;
+import com.kirilo.game.abstracts.AbstractMovingObject;
+import com.kirilo.game.enums.GameObjectType;
+import com.kirilo.game.enums.MovingDirection;
 import com.kirilo.game.interfaces.maps.DrawableMap;
 
 import javax.swing.*;
@@ -24,6 +28,15 @@ public class FrameGame extends BaseFrame {
         panelMap.add(gameMap.getMap());
     }
 
+    private void moveObject(MovingDirection direction, GameObjectType objectType) {
+        AbstractGameObject gameObject = gameMap.getGameMap().getGameObjects(objectType).get(0);
+
+        if (gameObject instanceof AbstractMovingObject) {
+            ((AbstractMovingObject) gameObject).move(direction);
+            gameMap.drawMap();
+        }
+    }
+
     private void jbtnSaveActionPerformed(ActionEvent e) {
         // TODO add your code here
     }
@@ -33,19 +46,19 @@ public class FrameGame extends BaseFrame {
     }
 
     private void jbtnUpActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        moveObject(MovingDirection.UP, GameObjectType.GOLDMAN);
     }
 
     private void jbtnDownActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        moveObject(MovingDirection.DOWN, GameObjectType.GOLDMAN);
     }
 
     private void jbtnLeftActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        moveObject(MovingDirection.LEFT, GameObjectType.GOLDMAN);
     }
 
     private void jbtnRightActionPerformed(ActionEvent e) {
-        // TODO add your code here
+        moveObject(MovingDirection.RIGHT, GameObjectType.GOLDMAN);
     }
 
     private void initComponents() {

@@ -11,6 +11,14 @@ public interface MovingObject extends StaticObject {
 
     void move(MovingDirection direction);
 
+    void setIconLeft(ImageIcon iconLeft);
+
+    void setIconRight(ImageIcon iconRight);
+
+    void setIconUp(ImageIcon iconUp);
+
+    void setIconDown(ImageIcon iconDown);
+
     ImageIcon getIconLeft();
 
     ImageIcon getIconRight();

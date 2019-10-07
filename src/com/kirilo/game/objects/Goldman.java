@@ -3,7 +3,6 @@ package com.kirilo.game.objects;
 import com.kirilo.game.abstracts.AbstractGameObject;
 import com.kirilo.game.abstracts.AbstractMovingObject;
 import com.kirilo.game.enums.GameObjectType;
-import com.kirilo.game.enums.MovingDirection;
 
 public class Goldman extends AbstractMovingObject {
 
@@ -39,11 +38,6 @@ public class Goldman extends AbstractMovingObject {
 
     @Override
     public void getMoveResult(AbstractGameObject gameObjectWithNewCoordinate) {
-
-    }
-
-    @Override
-    public void move(MovingDirection direction) {
-
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

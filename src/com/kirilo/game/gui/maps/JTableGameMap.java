@@ -35,9 +35,7 @@ public class JTableGameMap implements DrawableMap {
 
         gameMap = new MapCreator().getSingleton().createObject(type);
 
-        this.gameMap.loadMap(source);
-
-        updateObjectsArray();
+        gameMap.loadMap(source);
     }
 
     private void fillEmptyMap(int width, int height) {
@@ -71,7 +69,15 @@ public class JTableGameMap implements DrawableMap {
     }
 
     @Override
+    public AbstractGameMap getGameMap() {
+        return gameMap;
+    }
+
+    @Override
     public boolean drawMap() {
+
+        updateObjectsArray();
+
         try {
             columnNames = new String[gameMap.getWidth()];
             Arrays.fill(columnNames, "");
