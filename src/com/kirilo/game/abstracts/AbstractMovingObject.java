@@ -13,7 +13,7 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
     private ImageIcon iconDown;
 
     @Override
-    public void move(MovingDirection direction) {
+    public void move(MovingDirection direction, AbstractGameMap abstractGameMap) {
         int x = getCoordinate().getX();
         int y = getCoordinate().getY();
 

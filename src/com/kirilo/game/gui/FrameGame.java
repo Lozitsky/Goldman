@@ -1,7 +1,5 @@
 package com.kirilo.game.gui;
 
-import com.kirilo.game.abstracts.AbstractGameObject;
-import com.kirilo.game.abstracts.AbstractMovingObject;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
 import com.kirilo.game.interfaces.maps.DrawableMap;
@@ -29,12 +27,15 @@ public class FrameGame extends BaseFrame {
     }
 
     private void moveObject(MovingDirection direction, GameObjectType objectType) {
-        AbstractGameObject gameObject = gameMap.getGameMap().getGameObjects(objectType).get(0);
+//        AbstractGameObject gameObject = gameMap.getGameMap().getGameCollection().getGameObjects(objectType).get(0);
 
-        if (gameObject instanceof AbstractMovingObject) {
-            ((AbstractMovingObject) gameObject).move(direction);
+/*        if (gameObject instanceof AbstractMovingObject) {
+            ((AbstractMovingObject) gameObject).move(direction, this);
             gameMap.drawMap();
-        }
+        }*/
+
+gameMap.getGameMap().move(direction, objectType);
+gameMap.drawMap();
     }
 
     private void jbtnSaveActionPerformed(ActionEvent e) {

@@ -1,5 +1,6 @@
 package com.kirilo.game.gui;
 
+import com.kirilo.game.objects.maps.MapCollection;
 import com.kirilo.game.enums.LocationType;
 import com.kirilo.game.gui.maps.JTableGameMap;
 
@@ -12,7 +13,7 @@ public class FrameMainMenu extends JFrame {
     private FrameGame frameGame;
     private BaseFrame frameStatus = new FrameStatus();
     private BaseFrame frameSavedGames = new FrameSavedGames();
-    private JTableGameMap gameMap = new JTableGameMap(LocationType.FS, "game.map");
+    private JTableGameMap gameMap = new JTableGameMap(LocationType.FS, "game.map", new MapCollection());
 
     public FrameMainMenu() throws HeadlessException {
         initComponents();

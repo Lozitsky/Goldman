@@ -3,6 +3,7 @@ package com.kirilo.game.objects.maps;
 import com.kirilo.game.abstracts.AbstractGameMap;
 import com.kirilo.game.abstracts.AbstractGameObject;
 import com.kirilo.game.enums.GameObjectType;
+import com.kirilo.game.interfaces.collections.GameCollection;
 import com.kirilo.game.objects.Coordinate;
 import com.kirilo.game.objects.creators.GameObjectCreator;
 
@@ -14,6 +15,10 @@ import java.util.logging.Logger;
 
 public class FSGameMap extends AbstractGameMap {
     private Logger logger = Logger.getLogger(this.getClass().getName());
+
+    public FSGameMap(GameCollection gameCollection) {
+        super(gameCollection);
+    }
 
     @Override
     public boolean loadMap(Object source) {
@@ -60,7 +65,7 @@ public class FSGameMap extends AbstractGameMap {
 
 //        AbstractGameObject gameObject = singleton.createObject(objectType, coordinate);
 
-        addGameObject(gameObject);
+        getGameCollection().addGameObject(gameObject);
 
         switch (gameObject.getType()) {
             case EXIT:
@@ -73,7 +78,7 @@ public class FSGameMap extends AbstractGameMap {
     }
 
     @Override
-    public boolean saveMap(Object source) {
+    public boolean saveMap(java.lang.Object source) {
         return false;
     }
 

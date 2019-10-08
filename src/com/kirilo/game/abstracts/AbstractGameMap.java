@@ -1,33 +1,41 @@
 package com.kirilo.game.abstracts;
 
 import com.kirilo.game.enums.GameObjectType;
+import com.kirilo.game.enums.MovingDirection;
+import com.kirilo.game.interfaces.collections.GameCollection;
 import com.kirilo.game.interfaces.maps.GameMap;
-import com.kirilo.game.objects.Coordinate;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class AbstractGameMap implements GameMap, Serializable {
     private static final long serialVersionUID = -6588926659509137481L;
+    private GameCollection gameCollection;
     private int width;
     private int height;
     private int timeLimit;
     private String name;
     private boolean isExitExist;
     private boolean isGoldManExist;
-    private HashMap<Coordinate, AbstractGameObject> gameObjects = new HashMap<>();
-    private EnumMap<GameObjectType, ArrayList<AbstractGameObject>> typeObjects = new EnumMap<>(GameObjectType.class);
 
-    public void addGameObject(AbstractGameObject gameObject) {
-        gameObjects.put(gameObject.getCoordinate(), gameObject);
-        ArrayList<AbstractGameObject> list = typeObjects.get(gameObject.getType());
+    public AbstractGameMap(GameCollection gameCollection) {
+        this.gameCollection = gameCollection;
+    }
 
-        if (list == null) {
-            list = new ArrayList<>();
+    public GameCollection getGameCollection() {
+        if (gameCollection == null) {
+            try {
+                throw new Exception("Game collection not initialized!");
+            } catch (Exception e) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+            }
         }
+        return gameCollection;
+    }
 
-        list.add(gameObject);
-        typeObjects.put(gameObject.getType(), list);
+    public void setGameCollection(GameCollection gameCollection) {
+        this.gameCollection = gameCollection;
     }
 
     public String getName() {
@@ -89,19 +97,12 @@ public abstract class AbstractGameMap implements GameMap, Serializable {
         return isExitExist && isGoldManExist;
     }
 
-    public List<AbstractGameObject> getGameObjects(GameObjectType type) {
-        return typeObjects.get(type);
-    }
+    public void move(MovingDirection direction, GameObjectType gameObjectType) {
 
-    public Collection<AbstractGameObject> getAllGameObjects() {
-        return gameObjects.values();
-    }
-
-    public AbstractGameObject getObjectByCoordinate(Coordinate coordinate) {
-        return gameObjects.get(coordinate);
-    }
-
-    public AbstractGameObject getObjectByCoordinate(int x, int y) {
-        return gameObjects.get(new Coordinate(x, y));
+        for (AbstractGameObject gameObject : getGameCollection().getGameObjects(gameObjectType)) {
+            if (gameObject instanceof AbstractMovingObject) {
+                ((AbstractMovingObject) gameObject).move(direction, this);
+            }
+        }
     }
 }

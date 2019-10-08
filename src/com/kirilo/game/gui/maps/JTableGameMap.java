@@ -4,6 +4,7 @@ import com.kirilo.game.abstracts.AbstractGameMap;
 import com.kirilo.game.abstracts.AbstractGameObject;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.LocationType;
+import com.kirilo.game.interfaces.collections.GameCollection;
 import com.kirilo.game.interfaces.maps.DrawableMap;
 import com.kirilo.game.objects.Coordinate;
 import com.kirilo.game.objects.Nothing;
@@ -22,7 +23,7 @@ public class JTableGameMap implements DrawableMap {
     private String[] columnNames;
     private AbstractGameObject[][] gameObjects;
 
-    public JTableGameMap(LocationType type, Object source) {
+    public JTableGameMap(LocationType type, java.lang.Object source, GameCollection gameCollection) {
         table.setEnabled(false);
         table.setSize(new Dimension(300, 300));
         table.setRowHeight(26);
@@ -33,7 +34,7 @@ public class JTableGameMap implements DrawableMap {
         table.setUpdateSelectionOnSort(false);
         table.setVerifyInputWhenFocusTarget(false);
 
-        gameMap = new MapCreator().getSingleton().createObject(type);
+        gameMap = new MapCreator().getSingleton().createObject(type, gameCollection);
 
         gameMap.loadMap(source);
     }
@@ -49,7 +50,7 @@ public class JTableGameMap implements DrawableMap {
     private void updateObjectsArray() {
         gameObjects = new AbstractGameObject[gameMap.getHeight()][gameMap.getWidth()];
         fillEmptyMap(gameMap.getWidth(), gameMap.getHeight());
-        gameMap.getAllGameObjects().forEach(gameObject -> {
+        gameMap.getGameCollection().getAllGameObjects().forEach(gameObject -> {
             if (!gameObject.getType().equals(GameObjectType.NOTHING)) {
                 int x = gameObject.getCoordinate().getX();
                 int y = gameObject.getCoordinate().getY();

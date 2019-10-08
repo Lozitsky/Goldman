@@ -3,17 +3,17 @@ package com.kirilo.game.objects.creators;
 import com.kirilo.game.abstracts.AbstractGameMap;
 import com.kirilo.game.abstracts.AbstractObjectCreator;
 import com.kirilo.game.enums.LocationType;
-import com.kirilo.game.objects.Coordinate;
+import com.kirilo.game.interfaces.collections.GameCollection;
 import com.kirilo.game.objects.maps.FSGameMap;
 
 public class MapCreator extends AbstractObjectCreator {
     @Override
-    public AbstractGameMap createObject(Enum type, Coordinate... coordinates) {
+    public AbstractGameMap createObject(Enum type, Object... objects) {
         AbstractGameMap map = null;
 
         switch ((LocationType) type) {
             case FS:
-                map = new FSGameMap();
+                map = new FSGameMap((GameCollection) objects[0]);
             case DB:
                 break;
             default:
@@ -21,6 +21,10 @@ public class MapCreator extends AbstractObjectCreator {
         }
 
         return map;
+    }
+
+    public AbstractGameMap createObject(Enum type, GameCollection gameCollection) {
+        return this.createObject(type, (Object) gameCollection);
     }
 
 /*    public MapCreator getSingleton() {
