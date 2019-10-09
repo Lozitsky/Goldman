@@ -34,8 +34,8 @@ public class FrameGame extends BaseFrame {
             gameMap.drawMap();
         }*/
 
-gameMap.getGameMap().move(direction, objectType);
-gameMap.drawMap();
+        gameMap.getGameMap().move(direction, objectType);
+        gameMap.drawMap();
     }
 
     private void jbtnSaveActionPerformed(ActionEvent e) {

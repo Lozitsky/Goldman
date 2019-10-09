@@ -4,15 +4,53 @@ import com.kirilo.game.enums.MovingDirection;
 import com.kirilo.game.interfaces.MovingObject;
 import com.kirilo.game.objects.Coordinate;
 
-import javax.swing.*;
-
 public abstract class AbstractMovingObject extends AbstractGameObject implements MovingObject {
-    private ImageIcon iconLeft;
-    private ImageIcon iconRight;
-    private ImageIcon iconUp;
-    private ImageIcon iconDown;
+    public abstract void changeIcon(MovingDirection direction);
 
     @Override
+    public void move(MovingDirection direction, AbstractGameMap abstractGameMap) {
+        Coordinate newCoordinate = getNewCoordinate(direction);
+        AbstractGameObject objectByCoordinate = abstractGameMap.getGameCollection().getObjectByCoordinate(newCoordinate);
+
+        switch (objectByCoordinate.getType()) {
+            case NOTHING:
+                changeIcon(direction);
+                setCoordinate(newCoordinate);
+            default: {
+            }
+        }
+    }
+
+    public Coordinate getNewCoordinate(MovingDirection direction) {
+
+        int x = getCoordinate().getX();
+        int y = getCoordinate().getY();
+
+        Coordinate coordinate = new Coordinate(x, y);
+
+        switch (direction) {
+            case UP:
+                coordinate.setY(--y);
+                break;
+            case DOWN:
+                coordinate.setY(++y);
+                break;
+            case LEFT:
+                coordinate.setX(--x);
+                break;
+            case RIGHT:
+                coordinate.setX(++x);
+                break;
+        }
+        return coordinate;
+    }
+
+/*    private ImageIcon iconLeft;
+    private ImageIcon iconRight;
+    private ImageIcon iconUp;
+    private ImageIcon iconDown;*/
+
+/*    @Override
     public void move(MovingDirection direction, AbstractGameMap abstractGameMap) {
         int x = getCoordinate().getX();
         int y = getCoordinate().getY();
@@ -39,9 +77,9 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
         }
 
         setCoordinate(coordinate);
-    }
+    }*/
 
-    @Override
+/*    @Override
     public ImageIcon getIconLeft() {
         return iconLeft;
     }
@@ -79,5 +117,5 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
     @Override
     public void setIconDown(ImageIcon iconDown) {
         this.iconDown = iconDown;
-    }
+    }*/
 }
