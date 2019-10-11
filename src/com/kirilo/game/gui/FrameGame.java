@@ -1,8 +1,11 @@
 package com.kirilo.game.gui;
 
+import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
 import com.kirilo.game.interfaces.maps.DrawableMap;
+import com.kirilo.game.objects.Goldman;
+import com.kirilo.game.utils.MessageManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +25,7 @@ public class FrameGame extends BaseFrame {
         this.gameMap = gameMap;
         gameMap.drawMap();
 
+        labelTurnsLeft.setText(String.valueOf(gameMap.getGameMap().getTimeLimit()));
         panelMap.removeAll();
         panelMap.add(gameMap.getMap());
     }
@@ -34,8 +38,33 @@ public class FrameGame extends BaseFrame {
             gameMap.drawMap();
         }*/
 
-        gameMap.getGameMap().move(direction, objectType);
+
+        ActionResult actionResult = gameMap.getGameMap().move(direction, objectType);
+
+        if (ActionResult.DIE == actionResult) {
+            gameOver();
+            return;
+        }
+//        gameMap.getGameMap().getGameCollection().moveObject(direction, objectType);
+
         gameMap.drawMap();
+
+        if (GameObjectType.GOLDMAN == objectType) {
+            Goldman goldman = (Goldman) gameMap.getGameMap().getGameCollection().getGameObjects(objectType).get(0);
+
+            if (goldman.getTurnsNumber() >= gameMap.getGameMap().getTimeLimit()) {
+                gameOver();
+                return;
+            }
+
+            labelScore.setText(String.valueOf(goldman.getTotalScore()));
+            labelTurnsLeft.setText(String.valueOf(gameMap.getGameMap().getTimeLimit() - goldman.getTurnsNumber()));
+        }
+    }
+
+    private void gameOver() {
+        MessageManager.showInformMessage(null, "Game Over!");
+        closeFrame();
     }
 
     private void jbtnSaveActionPerformed(ActionEvent e) {
@@ -79,9 +108,9 @@ public class FrameGame extends BaseFrame {
         jbtnLeft = new JButton();
         jbtnRight = new JButton();
         label1 = new JLabel();
-        label2 = new JLabel();
+        labelScore = new JLabel();
         label3 = new JLabel();
-        label4 = new JLabel();
+        labelTurnsLeft = new JLabel();
         jbtnSave = new JButton();
         jbtnExit = new JButton();
 
@@ -125,13 +154,11 @@ public class FrameGame extends BaseFrame {
         {
             panel1.setPreferredSize(new Dimension(496, 322));
             panel1.setMinimumSize(new Dimension(496, 322));
-            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax
-            . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e" , javax. swing
-            .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .
-            Font ( "Dialo\u0067", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red
-            ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override
-            public void propertyChange (java . beans. PropertyChangeEvent e) { if( "borde\u0072" .equals ( e. getPropertyName (
-            ) ) )throw new RuntimeException( ) ;} } );
+            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(
+            0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder
+            .BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font.BOLD,12),java.awt.Color.
+            red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.
+            beans.PropertyChangeEvent e){if("\u0062order".equals(e.getPropertyName()))throw new RuntimeException();}});
 
             //======== panelMap ========
             {
@@ -161,14 +188,14 @@ public class FrameGame extends BaseFrame {
                 //---- label1 ----
                 label1.setText("Number of points:");
 
-                //---- label2 ----
-                label2.setText("0");
+                //---- labelScore ----
+                labelScore.setText("0");
 
                 //---- label3 ----
                 label3.setText("Steps left:");
 
-                //---- label4 ----
-                label4.setText("0");
+                //---- labelTurnsLeft ----
+                labelTurnsLeft.setText("0");
 
                 //---- jbtnSave ----
                 jbtnSave.setText("Save");
@@ -201,8 +228,8 @@ public class FrameGame extends BaseFrame {
                                 .addComponent(label1, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(panel3Layout.createParallelGroup()
-                                .addComponent(label2, GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
-                                .addComponent(label4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(labelScore, GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
+                                .addComponent(labelTurnsLeft, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(panel3Layout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(panel3Layout.createParallelGroup()
@@ -238,10 +265,10 @@ public class FrameGame extends BaseFrame {
                             .addGap(18, 18, 18)
                             .addGroup(panel3Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(label1)
-                                .addComponent(label2))
+                                .addComponent(labelScore))
                             .addGap(18, 18, 18)
                             .addGroup(panel3Layout.createParallelGroup()
-                                .addComponent(label4)
+                                .addComponent(labelTurnsLeft)
                                 .addComponent(label3))
                             .addGap(18, 18, 18)
                             .addComponent(jbtnSave, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
@@ -308,9 +335,9 @@ public class FrameGame extends BaseFrame {
     private JButton jbtnLeft;
     private JButton jbtnRight;
     private JLabel label1;
-    private JLabel label2;
+    private JLabel labelScore;
     private JLabel label3;
-    private JLabel label4;
+    private JLabel labelTurnsLeft;
     private JButton jbtnSave;
     private JButton jbtnExit;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

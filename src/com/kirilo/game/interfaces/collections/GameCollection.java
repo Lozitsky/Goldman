@@ -1,7 +1,9 @@
 package com.kirilo.game.interfaces.collections;
 
 import com.kirilo.game.abstracts.AbstractGameObject;
+import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
+import com.kirilo.game.enums.MovingDirection;
 import com.kirilo.game.objects.Coordinate;
 
 import java.util.Collection;
@@ -17,4 +19,6 @@ public interface GameCollection {
     AbstractGameObject getObjectByCoordinate(Coordinate coordinate);
 
     AbstractGameObject getObjectByCoordinate(int x, int y);
+
+    ActionResult moveObject(MovingDirection direction, GameObjectType objectType);
 }

@@ -8,7 +8,6 @@ import com.kirilo.game.objects.Coordinate;
 import com.kirilo.game.objects.creators.GameObjectCreator;
 
 import java.io.*;
-import java.nio.file.Paths;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,12 +21,13 @@ public class FSGameMap extends AbstractGameMap {
 
     @Override
     public boolean loadMap(Object source) {
-        setExitExist(false);
-        setGoldManExist(false);
-        File file = Paths.get("resources/game.map").toFile();
+//        File file = Paths.get("resources/game.map").toFile();
+        File file = new File(source.toString());
         if (!file.exists()) {
             throw new IllegalArgumentException("File must not be empty! " + file.getPath());
         }
+        setExitExist(false);
+        setGoldManExist(false);
 
         setHeight((int) getLineCount(file));
 
@@ -78,7 +78,7 @@ public class FSGameMap extends AbstractGameMap {
     }
 
     @Override
-    public boolean saveMap(java.lang.Object source) {
+    public boolean saveMap(Object source) {
         return false;
     }
 

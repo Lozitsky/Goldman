@@ -1,5 +1,6 @@
 package com.kirilo.game.abstracts;
 
+import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
 import com.kirilo.game.interfaces.collections.GameCollection;
@@ -97,12 +98,12 @@ public abstract class AbstractGameMap implements GameMap, Serializable {
         return isExitExist && isGoldManExist;
     }
 
-    public void move(MovingDirection direction, GameObjectType gameObjectType) {
-
-        for (AbstractGameObject gameObject : getGameCollection().getGameObjects(gameObjectType)) {
+    public ActionResult move(MovingDirection direction, GameObjectType gameObjectType) {
+        return getGameCollection().moveObject(direction, gameObjectType);
+/*        for (AbstractGameObject gameObject : getGameCollection().getGameObjects(gameObjectType)) {
             if (gameObject instanceof AbstractMovingObject) {
                 ((AbstractMovingObject) gameObject).move(direction, this);
             }
-        }
+        }*/
     }
 }

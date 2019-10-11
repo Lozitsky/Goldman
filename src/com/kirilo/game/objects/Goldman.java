@@ -1,6 +1,8 @@
 package com.kirilo.game.objects;
 
+import com.kirilo.game.abstracts.AbstractGameObject;
 import com.kirilo.game.abstracts.AbstractMovingObject;
+import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
 
@@ -8,6 +10,7 @@ public class Goldman extends AbstractMovingObject {
 
     private int score;
     private int turnsNumber;
+    private int totalScore;
 
     public Goldman(Coordinate coordinate) {
         setType(GameObjectType.GOLDMAN);
@@ -19,6 +22,10 @@ public class Goldman extends AbstractMovingObject {
 
 //        setIcon(getIconUp());
         setIcon(getImageIcon("com/kirilo/game/images/goldman_up.png"));
+    }
+
+    public int getTotalScore() {
+        return totalScore;
     }
 
     public int getScore() {
@@ -52,6 +59,22 @@ public class Goldman extends AbstractMovingObject {
             case LEFT:
                 setIcon(getImageIcon("com/kirilo/game/images/goldman_left.png"));
                 break;
+        }
+    }
+
+    @Override
+    public ActionResult doAction(AbstractGameObject gameObject) {
+
+        turnsNumber++;
+
+        switch (gameObject.getType()) {
+            case TREASURE:
+                totalScore += ((Treasure) gameObject).getScore();
+                return ActionResult.COLLECT_TREASURE;
+            case MONSTER:
+                return ActionResult.DIE;
+            default:
+                return super.doAction(gameObject);
         }
     }
 

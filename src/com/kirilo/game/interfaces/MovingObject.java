@@ -1,13 +1,16 @@
 package com.kirilo.game.interfaces;
 
 
-import com.kirilo.game.abstracts.AbstractGameMap;
+import com.kirilo.game.abstracts.AbstractGameObject;
+import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.MovingDirection;
 
 public interface MovingObject extends StaticObject {
 //    void getMoveResult(AbstractGameObject gameObjectWithNewCoordinate);
 
-    void move(MovingDirection direction, AbstractGameMap abstractGameMap);
+    ActionResult moveToObject(MovingDirection direction, AbstractGameObject gameObject);
+
+    int getStep();
 
 /*    void setIconLeft(ImageIcon iconLeft);
 

@@ -1,5 +1,6 @@
 package com.kirilo.game.abstracts;
 
+import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.MovingDirection;
 import com.kirilo.game.interfaces.MovingObject;
 import com.kirilo.game.objects.Coordinate;
@@ -7,7 +8,39 @@ import com.kirilo.game.objects.Coordinate;
 public abstract class AbstractMovingObject extends AbstractGameObject implements MovingObject {
     public abstract void changeIcon(MovingDirection direction);
 
+    private int step = 1;
+
     @Override
+    public ActionResult moveToObject(MovingDirection direction, AbstractGameObject gameObject) {
+        actionBeforeMove(direction);
+        return doAction(gameObject);
+    }
+
+    @Override
+    public int getStep() {
+        return step;
+    }
+
+    public void setStep(int step) {
+        this.step = step;
+    }
+
+    protected void actionBeforeMove(MovingDirection direction) {
+        changeIcon(direction);
+    }
+
+    public ActionResult doAction(AbstractGameObject gameObject) {
+        if (gameObject == null) {
+            return ActionResult.NO_ACTION;
+        }
+        switch (gameObject.getType()) {
+            case NOTHING:
+                return ActionResult.MOVE;
+            default:
+                return ActionResult.NO_ACTION;
+        }
+    }
+/*    @Override
     public void move(MovingDirection direction, AbstractGameMap abstractGameMap) {
         Coordinate newCoordinate = getNewCoordinate(direction);
         AbstractGameObject objectByCoordinate = abstractGameMap.getGameCollection().getObjectByCoordinate(newCoordinate);
@@ -19,7 +52,7 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
             default: {
             }
         }
-    }
+    }*/
 
     public Coordinate getNewCoordinate(MovingDirection direction) {
 

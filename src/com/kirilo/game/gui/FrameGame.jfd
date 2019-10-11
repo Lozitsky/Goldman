@@ -20,8 +20,8 @@ new FormModel {
 					name: "panelMap"
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq l {space :p:24:p, par t:::p {comp label3::::110:x, comp label1::::110:x}, space :::p, par l {comp label2::l::0:x, comp label4:::::x}}, seq {space :::p, par l {comp jbtnSave:::p:147:p, comp jbtnExit::l:p:147:p}, space :0:12:x}, seq t {space ::14:x, comp jbtnLeft:::p:40:p, space u:::p, par l {seq l {par l {comp jbtnDown:::p:40:p, comp jbtnUp:::p:40:p}, space :p:53:p}, comp jbtnRight::t:p:40:p}, space :::p}}"
-					"$verticalGroup": "par l {seq {par l {seq l {space :p:46:p, par l {comp jbtnLeft:::p:40:p, comp jbtnRight:::p:40:p}}, seq l {comp jbtnUp:::p:40:p, space :51:51:p, comp jbtnDown:::p:40:p}}, space :p:18:p, par b {comp label1::b:p::p, comp label2::b:p::p}, space s:::p, par l {comp label4:::p::p, comp label3:::p::p}, space s:::p, comp jbtnSave:::p:33:p, space u:::p, comp jbtnExit:::p:33:p, space :::p}}"
+					"$horizontalGroup": "par l {seq l {space :p:24:p, par t:::p {comp label3::::110:x, comp label1::::110:x}, space :::p, par l {comp labelScore::l::0:x, comp labelTurnsLeft:::::x}}, seq {space :::p, par l {comp jbtnSave:::p:147:p, comp jbtnExit::l:p:147:p}, space :0:12:x}, seq t {space ::14:x, comp jbtnLeft:::p:40:p, space u:::p, par l {seq l {par l {comp jbtnDown:::p:40:p, comp jbtnUp:::p:40:p}, space :p:53:p}, comp jbtnRight::t:p:40:p}, space :::p}}"
+					"$verticalGroup": "par l {seq {par l {seq l {space :p:46:p, par l {comp jbtnLeft:::p:40:p, comp jbtnRight:::p:40:p}}, seq l {comp jbtnUp:::p:40:p, space :51:51:p, comp jbtnDown:::p:40:p}}, space :p:18:p, par b {comp label1::b:p::p, comp labelScore::b:p::p}, space s:::p, par l {comp labelTurnsLeft:::p::p, comp label3:::p::p}, space s:::p, comp jbtnSave:::p:33:p, space u:::p, comp jbtnExit:::p:33:p, space :::p}}"
 				} ) {
 					name: "panel3"
 					"preferredSize": new java.awt.Dimension( 166, 312 )
@@ -50,7 +50,7 @@ new FormModel {
 						"text": "Number of points:"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label2"
+						name: "labelScore"
 						"text": "0"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
@@ -58,7 +58,7 @@ new FormModel {
 						"text": "Steps left:"
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label4"
+						name: "labelTurnsLeft"
 						"text": "0"
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
