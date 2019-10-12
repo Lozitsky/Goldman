@@ -1,8 +1,5 @@
 package com.kirilo.game.abstracts;
 
-import com.kirilo.game.enums.ActionResult;
-import com.kirilo.game.enums.GameObjectType;
-import com.kirilo.game.enums.MovingDirection;
 import com.kirilo.game.interfaces.collections.GameCollection;
 import com.kirilo.game.interfaces.maps.GameMap;
 
@@ -20,39 +17,19 @@ public abstract class AbstractGameMap implements GameMap, Serializable {
     private boolean isExitExist;
     private boolean isGoldManExist;
 
+    public AbstractGameMap() {
+    }
+
     public AbstractGameMap(GameCollection gameCollection) {
         this.gameCollection = gameCollection;
-    }
-
-    public GameCollection getGameCollection() {
-        if (gameCollection == null) {
-            try {
-                throw new Exception("Game collection not initialized!");
-            } catch (Exception e) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
-            }
-        }
-        return gameCollection;
-    }
-
-    public void setGameCollection(GameCollection gameCollection) {
-        this.gameCollection = gameCollection;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public boolean isExitExist() {
         return isExitExist;
     }
 
-    public void setExitExist(boolean exitExist) {
-        isExitExist = exitExist;
+    public void setExitExist(boolean isExitExist) {
+        this.isExitExist = isExitExist;
     }
 
     public boolean isGoldManExist() {
@@ -63,13 +40,12 @@ public abstract class AbstractGameMap implements GameMap, Serializable {
         isGoldManExist = goldManExist;
     }
 
-    @Override
-    public int getWidth() {
-        return width;
+    public String getName() {
+        return name;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -79,6 +55,15 @@ public abstract class AbstractGameMap implements GameMap, Serializable {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
     }
 
     @Override
@@ -98,12 +83,27 @@ public abstract class AbstractGameMap implements GameMap, Serializable {
         return isExitExist && isGoldManExist;
     }
 
-    public ActionResult move(MovingDirection direction, GameObjectType gameObjectType) {
+    public GameCollection getGameCollection() {
+        if (gameCollection == null) {
+            try {
+                throw new Exception("Game collection not initialized!");
+            } catch (Exception e) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        return gameCollection;
+    }
+
+    public void setGameCollection(GameCollection gameCollection) {
+        this.gameCollection = gameCollection;
+    }
+
+/*    public ActionResult move(MovingDirection direction, GameObjectType gameObjectType) {
         return getGameCollection().moveObject(direction, gameObjectType);
-/*        for (AbstractGameObject gameObject : getGameCollection().getGameObjects(gameObjectType)) {
+*//*        for (AbstractGameObject gameObject : getGameCollection().getGameObjects(gameObjectType)) {
             if (gameObject instanceof AbstractMovingObject) {
                 ((AbstractMovingObject) gameObject).move(direction, this);
             }
-        }*/
-    }
+        }*//*
+    }*/
 }

@@ -3,6 +3,7 @@ package com.kirilo.game.gui;
 import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
+import com.kirilo.game.interfaces.listeners.MoveResultListener;
 import com.kirilo.game.interfaces.maps.DrawableMap;
 import com.kirilo.game.objects.Goldman;
 import com.kirilo.game.utils.MessageManager;
@@ -11,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class FrameGame extends BaseFrame {
+public class FrameGame extends BaseFrame implements MoveResultListener {
 
     //    private GameMap gameMap = new FSGameMap();
     private DrawableMap gameMap;
@@ -24,48 +25,13 @@ public class FrameGame extends BaseFrame {
     public void setGameMap(DrawableMap gameMap) {
         this.gameMap = gameMap;
         gameMap.drawMap();
-
+        gameMap.getGameMap().getGameCollection().addMoveListener(this);
         labelTurnsLeft.setText(String.valueOf(gameMap.getGameMap().getTimeLimit()));
         panelMap.removeAll();
         panelMap.add(gameMap.getMap());
     }
 
-    private void moveObject(MovingDirection direction, GameObjectType objectType) {
-//        AbstractGameObject gameObject = gameMap.getGameMap().getGameCollection().getGameObjects(objectType).get(0);
 
-/*        if (gameObject instanceof AbstractMovingObject) {
-            ((AbstractMovingObject) gameObject).move(direction, this);
-            gameMap.drawMap();
-        }*/
-
-
-        ActionResult actionResult = gameMap.getGameMap().move(direction, objectType);
-
-        if (ActionResult.DIE == actionResult) {
-            gameOver();
-            return;
-        }
-//        gameMap.getGameMap().getGameCollection().moveObject(direction, objectType);
-
-        gameMap.drawMap();
-
-        if (GameObjectType.GOLDMAN == objectType) {
-            Goldman goldman = (Goldman) gameMap.getGameMap().getGameCollection().getGameObjects(objectType).get(0);
-
-            if (goldman.getTurnsNumber() >= gameMap.getGameMap().getTimeLimit()) {
-                gameOver();
-                return;
-            }
-
-            labelScore.setText(String.valueOf(goldman.getTotalScore()));
-            labelTurnsLeft.setText(String.valueOf(gameMap.getGameMap().getTimeLimit() - goldman.getTurnsNumber()));
-        }
-    }
-
-    private void gameOver() {
-        MessageManager.showInformMessage(null, "Game Over!");
-        closeFrame();
-    }
 
     private void jbtnSaveActionPerformed(ActionEvent e) {
         // TODO add your code here
@@ -89,6 +55,64 @@ public class FrameGame extends BaseFrame {
 
     private void jbtnRightActionPerformed(ActionEvent e) {
         moveObject(MovingDirection.RIGHT, GameObjectType.GOLDMAN);
+    }
+
+    private void moveObject(MovingDirection direction, GameObjectType objectType) {
+        gameMap.getGameMap().getGameCollection().moveObject(direction, objectType);
+//        AbstractGameObject gameObject = gameMap.getGameMap().getGameCollection().getGameObjects(objectType).get(0);
+
+/*        if (gameObject instanceof AbstractMovingObject) {
+            ((AbstractMovingObject) gameObject).move(direction, this);
+            gameMap.drawMap();
+        }*/
+
+
+/*        ActionResult actionResult = gameMap.getGameMap().move(direction, objectType);
+
+        if (ActionResult.DIE == actionResult) {
+            gameOver();
+            return;
+        }
+//        gameMap.getGameMap().getGameCollection().moveObject(direction, objectType);
+
+        gameMap.drawMap();
+
+        if (GameObjectType.GOLDMAN == objectType) {
+            Goldman goldman = (Goldman) gameMap.getGameMap().getGameCollection().getGameObjects(objectType).get(0);
+
+            if (goldman.getTurnsNumber() >= gameMap.getGameMap().getTimeLimit()) {
+                gameOver();
+                return;
+            }
+
+            labelScore.setText(String.valueOf(goldman.getTotalScore()));
+            labelTurnsLeft.setText(String.valueOf(gameMap.getGameMap().getTimeLimit() - goldman.getTurnsNumber()));
+        }*/
+
+    }
+    private void gameOver() {
+        MessageManager.showInformMessage(null, "Game Over!");
+        closeFrame();
+    }
+
+    @Override
+    public void notifyActionResult(ActionResult actionResult, Goldman goldman) {
+        switch (actionResult) {
+            case MOVE:
+                labelTurnsLeft.setText(String.valueOf(gameMap.getGameMap().getTimeLimit() - goldman.getTurnsNumber()));
+                if (goldman.getTurnsNumber() >= gameMap.getGameMap().getTimeLimit()) {
+                    gameOver();
+                }
+                break;
+            case DIE:
+                gameOver();
+                break;
+            case COLLECT_TREASURE:
+                labelScore.setText(String.valueOf(goldman.getTotalScore()));
+                break;
+        }
+
+        gameMap.drawMap();
     }
 
     private void initComponents() {

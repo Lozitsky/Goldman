@@ -3,18 +3,11 @@ package com.kirilo.game.abstracts;
 import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.MovingDirection;
 import com.kirilo.game.interfaces.MovingObject;
-import com.kirilo.game.objects.Coordinate;
 
 public abstract class AbstractMovingObject extends AbstractGameObject implements MovingObject {
     public abstract void changeIcon(MovingDirection direction);
 
     private int step = 1;
-
-    @Override
-    public ActionResult moveToObject(MovingDirection direction, AbstractGameObject gameObject) {
-        actionBeforeMove(direction);
-        return doAction(gameObject);
-    }
 
     @Override
     public int getStep() {
@@ -27,6 +20,12 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
 
     protected void actionBeforeMove(MovingDirection direction) {
         changeIcon(direction);
+    }
+
+    @Override
+    public ActionResult moveToObject(MovingDirection direction, AbstractGameObject gameObject) {
+        actionBeforeMove(direction);
+        return doAction(gameObject);
     }
 
     public ActionResult doAction(AbstractGameObject gameObject) {
@@ -54,7 +53,7 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
         }
     }*/
 
-    public Coordinate getNewCoordinate(MovingDirection direction) {
+/*    public Coordinate getNewCoordinate(MovingDirection direction) {
 
         int x = getCoordinate().getX();
         int y = getCoordinate().getY();
@@ -76,7 +75,7 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
                 break;
         }
         return coordinate;
-    }
+    }*/
 
 /*    private ImageIcon iconLeft;
     private ImageIcon iconRight;

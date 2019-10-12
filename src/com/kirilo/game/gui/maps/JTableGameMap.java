@@ -15,6 +15,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 public class JTableGameMap implements DrawableMap {
@@ -23,7 +25,7 @@ public class JTableGameMap implements DrawableMap {
     private String[] columnNames;
     private AbstractGameObject[][] gameObjects;
 
-    public JTableGameMap(LocationType type, java.lang.Object source, GameCollection gameCollection) {
+    public JTableGameMap(LocationType type, Object source, GameCollection gameCollection) {
         table.setEnabled(false);
         table.setSize(new Dimension(300, 300));
         table.setRowHeight(26);
@@ -65,16 +67,6 @@ public class JTableGameMap implements DrawableMap {
     }
 
     @Override
-    public Component getMap() {
-        return table;
-    }
-
-    @Override
-    public AbstractGameMap getGameMap() {
-        return gameMap;
-    }
-
-    @Override
     public boolean drawMap() {
 
         updateObjectsArray();
@@ -93,5 +85,40 @@ public class JTableGameMap implements DrawableMap {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public Component getMap() {
+        return table;
+    }
+
+    @Override
+    public AbstractGameMap getGameMap() {
+        return gameMap;
+    }
+
+    private TimeMover timeMover = new TimeMover();
+
+    private class TimeMover implements ActionListener {
+        private Timer timer;
+        private final static int MOVING_PAUSE = 500;
+
+        private TimeMover() {
+            timer = new Timer(MOVING_PAUSE, this);
+            timer.setInitialDelay(0);
+            timer.start();
+        }
+
+        public void start() {
+            timer.start();
+        }
+        public void stop() {
+            timer.stop();
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            gameMap.getGameCollection().moveObjectRandom(GameObjectType.MONSTER);
+        }
     }
 }

@@ -1,15 +1,15 @@
 package com.kirilo.game.interfaces.collections;
 
 import com.kirilo.game.abstracts.AbstractGameObject;
-import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
+import com.kirilo.game.interfaces.listeners.MoveResultNotifier;
 import com.kirilo.game.objects.Coordinate;
 
 import java.util.Collection;
 import java.util.List;
 
-public interface GameCollection {
+public interface GameCollection extends MoveResultNotifier {
     void addGameObject(AbstractGameObject gameObject);
 
     List<AbstractGameObject> getGameObjects(GameObjectType type);
@@ -20,5 +20,7 @@ public interface GameCollection {
 
     AbstractGameObject getObjectByCoordinate(int x, int y);
 
-    ActionResult moveObject(MovingDirection direction, GameObjectType objectType);
+    void moveObject(MovingDirection direction, GameObjectType objectType);
+
+    void moveObjectRandom(GameObjectType objectType);
 }
