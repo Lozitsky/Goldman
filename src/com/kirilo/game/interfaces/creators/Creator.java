@@ -1,4 +1,4 @@
-package com.kirilo.game.interfaces;
+package com.kirilo.game.interfaces.creators;
 
 
 public interface Creator<T> {

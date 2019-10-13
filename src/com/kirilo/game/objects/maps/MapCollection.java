@@ -7,9 +7,11 @@ import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
 import com.kirilo.game.interfaces.listeners.MoveResultListener;
+import com.kirilo.game.interfaces.movesrategies.MoveStrategy;
 import com.kirilo.game.objects.Coordinate;
 import com.kirilo.game.objects.Goldman;
 import com.kirilo.game.objects.Nothing;
+import com.kirilo.game.objects.Wall;
 
 import java.util.*;
 
@@ -19,7 +21,7 @@ public class MapCollection extends MapListenersRecorder {
 
     @Override
     public Collection<AbstractGameObject> getAllGameObjects() {
-        return new ArrayList(gameObjects.values());
+        return gameObjects.values();
     }
 
     @Override
@@ -29,12 +31,26 @@ public class MapCollection extends MapListenersRecorder {
 
     @Override
     public AbstractGameObject getObjectByCoordinate(Coordinate coordinate) {
-        return gameObjects.get(coordinate);
+        AbstractGameObject gameObject = gameObjects.get(coordinate);
+        if (gameObject == null) {
+            gameObject = new Wall(coordinate);
+        }
+        return gameObject;
     }
 
     @Override
     public AbstractGameObject getObjectByCoordinate(int x, int y) {
         return gameObjects.get(new Coordinate(x, y));
+    }
+
+    @Override
+    public void moveObject(MovingDirection direction, GameObjectType objectType) {
+        doMoveAction(direction, objectType, null);
+    }
+
+    @Override
+    public void moveObject(MoveStrategy moveStrategy, GameObjectType gameObjectType) {
+        doMoveAction(null, gameObjectType, moveStrategy);
     }
 
     @Override
@@ -50,18 +66,19 @@ public class MapCollection extends MapListenersRecorder {
         typeObjects.put(gameObject.getType(), list);
     }
 
-    @Override
-    public void moveObject(MovingDirection direction, GameObjectType objectType) {
+    public void doMoveAction(MovingDirection direction, GameObjectType objectType, MoveStrategy moveStrategy) {
         ActionResult actionResult = null;
+        Goldman goldman = (Goldman) getGameObjects(GameObjectType.GOLDMAN).get(0);
+
         for (AbstractGameObject gameObject : this.getGameObjects(objectType)) {
             if (gameObject instanceof AbstractMovingObject) {
                 AbstractMovingObject movingObject = (AbstractMovingObject) gameObject;
 
                 if (direction == null) {
-                    direction = getRandomMoveDirection(movingObject);
+                    direction = moveStrategy.getDirection(movingObject, goldman, this);
                 }
 
-                Coordinate coordinate = getNewCoordinate(direction, movingObject);
+                Coordinate coordinate = movingObject.getDirectionCoordinate(direction);
                 AbstractGameObject gameObjectWithNewCoordinate = getObjectByCoordinate(coordinate);
 
                 actionResult = movingObject.moveToObject(direction, gameObjectWithNewCoordinate);
@@ -80,7 +97,7 @@ public class MapCollection extends MapListenersRecorder {
             }
         }
 
-        notifyMoveListeners(actionResult, (Goldman) getGameObjects(GameObjectType.GOLDMAN).get(0));
+        notifyMoveListeners(actionResult, goldman);
 //        return actionResult;
     }
 
@@ -94,98 +111,10 @@ public class MapCollection extends MapListenersRecorder {
         gameObjects.put(coordinate1, object2);
     }
 
-    public Coordinate getNewCoordinate(MovingDirection direction, AbstractMovingObject movingObject) {
-
-        int x = movingObject.getCoordinate().getX();
-        int y = movingObject.getCoordinate().getY();
-
-        Coordinate coordinate = new Coordinate(x, y);
-
-        switch (direction) {
-            case UP:
-                coordinate.setY(y - movingObject.getStep());
-                break;
-            case DOWN:
-                coordinate.setY(y + movingObject.getStep());
-                break;
-            case LEFT:
-                coordinate.setX(x - movingObject.getStep());
-                break;
-            case RIGHT:
-                coordinate.setX(x + movingObject.getStep());
-                break;
-        }
-        return coordinate;
-    }
-
-
-    /*    private void swapCoordinates(AbstractGameObject object1, AbstractGameObject object2) {
-
-            Coordinate coordinate1 = object1.getCoordinate();
-            Coordinate coordinate2 = object2.getCoordinate();
-            object1.setCoordinate(coordinate2);
-            object2.setCoordinate(coordinate1);
-        }*/
-    private MovingDirection getRandomMoveDirection(AbstractMovingObject movingObject) {
-        Goldman goldman = (Goldman) getGameObjects(GameObjectType.GOLDMAN).get(0);
-
-        MovingDirection direction = null;
-        Coordinate coordinate = goldman.getCoordinate();
-        Coordinate monsterCoordinate = movingObject.getCoordinate();
-        int number = getRandomInt(2);
-        if (number == 1) {
-            number = getRandomInt(2);
-            switch (number) {
-                case 1:
-                    if (monsterCoordinate.getX() > coordinate.getX()) {
-                        direction = MovingDirection.LEFT;
-                    } else {
-                        direction = MovingDirection.RIGHT;
-                    }
-                    break;
-                case 2:
-                    if (monsterCoordinate.getY() > coordinate.getY()) {
-                        direction = MovingDirection.UP;
-                    } else {
-                        direction = MovingDirection.DOWN;
-                    }
-                    break;
-            }
-        } else {
-            number = getRandomInt(2);
-            switch (number) {
-                case 1:
-                    if (monsterCoordinate.getX() > coordinate.getX()) {
-                        direction = MovingDirection.RIGHT;
-                    } else {
-                        direction = MovingDirection.LEFT;
-                    }
-                    break;
-                case 2:
-                    if (monsterCoordinate.getY() > coordinate.getY()) {
-                        direction = MovingDirection.DOWN;
-                    } else {
-                        direction = MovingDirection.UP;
-                    }
-                    break;
-            }
-        }
-        return direction;
-    }
-
-    private int getRandomInt(int i) {
-        return new Random().nextInt(i) + 1;
-    }
-
     @Override
     public void notifyMoveListeners(ActionResult result, Goldman goldman) {
         for (MoveResultListener listener : getMoveListeners()) {
             listener.notifyActionResult(result, goldman);
         }
-    }
-
-    @Override
-    public void moveObjectRandom(GameObjectType objectType) {
-        moveObject(null, objectType);
     }
 }

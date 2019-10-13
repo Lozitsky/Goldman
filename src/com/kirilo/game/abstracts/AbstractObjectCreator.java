@@ -1,6 +1,6 @@
 package com.kirilo.game.abstracts;
 
-import com.kirilo.game.interfaces.Creator;
+import com.kirilo.game.interfaces.creators.Creator;
 import com.kirilo.game.objects.creators.FindFiles;
 import com.kirilo.game.interfaces.Singleton;
 

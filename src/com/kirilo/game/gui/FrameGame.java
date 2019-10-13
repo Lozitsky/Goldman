@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 
 public class FrameGame extends BaseFrame implements MoveResultListener {
 
+    private static final String DIE_MESSAGE = "Game Over!";
+    private static final String WIN_MESSAGE = "You are win! Your score: ";
     //    private GameMap gameMap = new FSGameMap();
     private DrawableMap gameMap;
 
@@ -59,39 +61,9 @@ public class FrameGame extends BaseFrame implements MoveResultListener {
 
     private void moveObject(MovingDirection direction, GameObjectType objectType) {
         gameMap.getGameMap().getGameCollection().moveObject(direction, objectType);
-//        AbstractGameObject gameObject = gameMap.getGameMap().getGameCollection().getGameObjects(objectType).get(0);
-
-/*        if (gameObject instanceof AbstractMovingObject) {
-            ((AbstractMovingObject) gameObject).move(direction, this);
-            gameMap.drawMap();
-        }*/
-
-
-/*        ActionResult actionResult = gameMap.getGameMap().move(direction, objectType);
-
-        if (ActionResult.DIE == actionResult) {
-            gameOver();
-            return;
-        }
-//        gameMap.getGameMap().getGameCollection().moveObject(direction, objectType);
-
-        gameMap.drawMap();
-
-        if (GameObjectType.GOLDMAN == objectType) {
-            Goldman goldman = (Goldman) gameMap.getGameMap().getGameCollection().getGameObjects(objectType).get(0);
-
-            if (goldman.getTurnsNumber() >= gameMap.getGameMap().getTimeLimit()) {
-                gameOver();
-                return;
-            }
-
-            labelScore.setText(String.valueOf(goldman.getTotalScore()));
-            labelTurnsLeft.setText(String.valueOf(gameMap.getGameMap().getTimeLimit() - goldman.getTurnsNumber()));
-        }*/
-
     }
-    private void gameOver() {
-        MessageManager.showInformMessage(null, "Game Over!");
+    private void gameOver(String message) {
+        MessageManager.showInformMessage(null, message);
         closeFrame();
     }
 
@@ -100,13 +72,14 @@ public class FrameGame extends BaseFrame implements MoveResultListener {
         switch (actionResult) {
             case MOVE:
                 labelTurnsLeft.setText(String.valueOf(gameMap.getGameMap().getTimeLimit() - goldman.getTurnsNumber()));
-                if (goldman.getTurnsNumber() >= gameMap.getGameMap().getTimeLimit()) {
-                    gameOver();
+                if (goldman.getTurnsNumber() < gameMap.getGameMap().getTimeLimit()) {
+                    break;
                 }
-                break;
             case DIE:
-                gameOver();
+                gameOver(DIE_MESSAGE);
                 break;
+            case WIN:
+                gameOver(WIN_MESSAGE + goldman.getTotalScore());
             case COLLECT_TREASURE:
                 labelScore.setText(String.valueOf(goldman.getTotalScore()));
                 break;

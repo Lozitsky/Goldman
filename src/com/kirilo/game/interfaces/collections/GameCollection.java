@@ -4,6 +4,7 @@ import com.kirilo.game.abstracts.AbstractGameObject;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
 import com.kirilo.game.interfaces.listeners.MoveResultNotifier;
+import com.kirilo.game.interfaces.movesrategies.MoveStrategy;
 import com.kirilo.game.objects.Coordinate;
 
 import java.util.Collection;
@@ -22,5 +23,5 @@ public interface GameCollection extends MoveResultNotifier {
 
     void moveObject(MovingDirection direction, GameObjectType objectType);
 
-    void moveObjectRandom(GameObjectType objectType);
+    void moveObject(MoveStrategy moveStrategy, GameObjectType gameObjectType);
 }

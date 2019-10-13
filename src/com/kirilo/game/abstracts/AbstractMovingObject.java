@@ -3,6 +3,7 @@ package com.kirilo.game.abstracts;
 import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.MovingDirection;
 import com.kirilo.game.interfaces.MovingObject;
+import com.kirilo.game.objects.Coordinate;
 
 public abstract class AbstractMovingObject extends AbstractGameObject implements MovingObject {
     public abstract void changeIcon(MovingDirection direction);
@@ -35,9 +36,35 @@ public abstract class AbstractMovingObject extends AbstractGameObject implements
         switch (gameObject.getType()) {
             case NOTHING:
                 return ActionResult.MOVE;
+            case WALL:
+                return ActionResult.NO_ACTION;
             default:
                 return ActionResult.NO_ACTION;
         }
+    }
+
+    public Coordinate getDirectionCoordinate(MovingDirection direction) {
+
+        int x = this.getCoordinate().getX();
+        int y = this.getCoordinate().getY();
+
+        Coordinate coordinate = new Coordinate(x, y);
+
+        switch (direction) {
+            case UP:
+                coordinate.setY(y - this.getStep());
+                break;
+            case DOWN:
+                coordinate.setY(y + this.getStep());
+                break;
+            case LEFT:
+                coordinate.setX(x - this.getStep());
+                break;
+            case RIGHT:
+                coordinate.setX(x + this.getStep());
+                break;
+        }
+        return coordinate;
     }
 /*    @Override
     public void move(MovingDirection direction, AbstractGameMap abstractGameMap) {

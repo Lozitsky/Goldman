@@ -2,14 +2,18 @@ package com.kirilo.game.gui.maps;
 
 import com.kirilo.game.abstracts.AbstractGameMap;
 import com.kirilo.game.abstracts.AbstractGameObject;
+import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.LocationType;
 import com.kirilo.game.interfaces.collections.GameCollection;
+import com.kirilo.game.interfaces.listeners.MoveResultListener;
 import com.kirilo.game.interfaces.maps.DrawableMap;
 import com.kirilo.game.objects.Coordinate;
+import com.kirilo.game.objects.Goldman;
 import com.kirilo.game.objects.Nothing;
 import com.kirilo.game.objects.Wall;
 import com.kirilo.game.objects.creators.MapCreator;
+import com.kirilo.game.objects.movesrategies.AgressiveMoving;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -39,6 +43,8 @@ public class JTableGameMap implements DrawableMap {
         gameMap = new MapCreator().getSingleton().createObject(type, gameCollection);
 
         gameMap.loadMap(source);
+
+        timeMover = new TimeMover();
     }
 
     private void fillEmptyMap(int width, int height) {
@@ -97,16 +103,22 @@ public class JTableGameMap implements DrawableMap {
         return gameMap;
     }
 
-    private TimeMover timeMover = new TimeMover();
+    public TimeMover getTimeMover() {
+        return timeMover;
+    }
 
-    private class TimeMover implements ActionListener {
+    private TimeMover timeMover;
+
+    private class TimeMover implements ActionListener, MoveResultListener {
         private Timer timer;
         private final static int MOVING_PAUSE = 500;
+        private static final int INIT_PAUSE = 1000;
 
         private TimeMover() {
             timer = new Timer(MOVING_PAUSE, this);
-            timer.setInitialDelay(0);
+            timer.setInitialDelay(INIT_PAUSE);
             timer.start();
+            gameMap.getGameCollection().addMoveListener(this);
         }
 
         public void start() {
@@ -118,7 +130,17 @@ public class JTableGameMap implements DrawableMap {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            gameMap.getGameCollection().moveObjectRandom(GameObjectType.MONSTER);
+            gameMap.getGameCollection().moveObject(new AgressiveMoving(),GameObjectType.MONSTER);
+        }
+
+        @Override
+        public void notifyActionResult(ActionResult actionResult, Goldman goldman) {
+            switch (actionResult) {
+                case DIE:
+                case WIN:
+                    timer.stop();
+                    break;
+            }
         }
     }
 }
