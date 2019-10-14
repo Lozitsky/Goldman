@@ -5,17 +5,13 @@ import com.kirilo.game.abstracts.AbstractMovingObject;
 import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
+import com.kirilo.game.interfaces.SoundObject;
 
-public class Monster extends AbstractMovingObject {
+public class Monster extends AbstractMovingObject implements SoundObject {
 
     public Monster(Coordinate coordinate) {
         setType(GameObjectType.MONSTER);
         setCoordinate(coordinate);
-/*        setIconUp(getImageIcon("com/kirilo/game/images/monster_up.jpg"));
-        setIconDown(getImageIcon("com/kirilo/game/images/monster_down.jpg"));
-        setIconLeft(getImageIcon("com/kirilo/game/images/monster_left.jpg"));
-        setIconRight(getImageIcon("com/kirilo/game/images/monster_right.jpg"));
-        setIcon(getIconUp());*/
         setIcon(getImageIcon("com/kirilo/game/images/monster_up.jpg"));
     }
 
@@ -51,8 +47,12 @@ public class Monster extends AbstractMovingObject {
 
     }
 
-/*    @Override
-    public void getMoveResult(AbstractGameObject gameObjectWithNewCoordinate) {
-
-    }*/
+    @Override
+    public String getSoundName(ActionResult actionResult) {
+        switch (actionResult) {
+            case DIE:
+                return WavPlayer.DIE_WAV;
+        }
+        return null;
+    }
 }

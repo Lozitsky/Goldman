@@ -5,8 +5,9 @@ import com.kirilo.game.abstracts.AbstractMovingObject;
 import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
+import com.kirilo.game.interfaces.SoundObject;
 
-public class Goldman extends AbstractMovingObject {
+public class Goldman extends AbstractMovingObject implements SoundObject {
 
     private int score;
     private int turnsNumber;
@@ -77,6 +78,15 @@ public class Goldman extends AbstractMovingObject {
             default:
                 return super.doAction(gameObject);
         }
+    }
+
+    @Override
+    public String getSoundName(ActionResult actionResult) {
+        switch (actionResult) {
+            case DIE:
+                return WavPlayer.DIE_WAV;
+        }
+        return null;
     }
 
 /*    @Override

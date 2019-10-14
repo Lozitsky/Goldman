@@ -8,14 +8,15 @@ import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
 import com.kirilo.game.interfaces.listeners.MoveResultListener;
 import com.kirilo.game.interfaces.movesrategies.MoveStrategy;
-import com.kirilo.game.objects.Coordinate;
-import com.kirilo.game.objects.Goldman;
-import com.kirilo.game.objects.Nothing;
-import com.kirilo.game.objects.Wall;
+import com.kirilo.game.objects.*;
 
 import java.util.*;
 
 public class MapCollection extends MapListenersRecorder {
+    public MapCollection() {
+        addMoveListener(new WavPlayer());
+    }
+
     private HashMap<Coordinate, AbstractGameObject> gameObjects = new HashMap<>();
     private EnumMap<GameObjectType, ArrayList<AbstractGameObject>> typeObjects = new EnumMap<>(GameObjectType.class);
 
@@ -98,11 +99,9 @@ public class MapCollection extends MapListenersRecorder {
         }
 
         notifyMoveListeners(actionResult, goldman);
-//        return actionResult;
     }
 
     private void swapObjects(AbstractGameObject object1, AbstractGameObject object2) {
-//        swapCoordinates(object1, object2);
         Coordinate coordinate1 = object1.getCoordinate();
         Coordinate coordinate2 = object2.getCoordinate();
         object1.setCoordinate(coordinate2);

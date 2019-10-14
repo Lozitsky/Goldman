@@ -1,5 +1,6 @@
 package com.kirilo.game.gui;
 
+import com.kirilo.game.abstracts.AbstractMovingObject;
 import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
@@ -16,6 +17,17 @@ public class FrameGame extends BaseFrame implements MoveResultListener {
 
     private static final String DIE_MESSAGE = "Game Over!";
     private static final String WIN_MESSAGE = "You are win! Your score: ";
+
+    private static boolean endOfGame;
+
+    public static boolean isEndOfGame() {
+        return endOfGame;
+    }
+
+    public static void setEndOfGame(boolean endOfGame) {
+        FrameGame.endOfGame = endOfGame;
+    }
+
     //    private GameMap gameMap = new FSGameMap();
     private DrawableMap gameMap;
 
@@ -63,12 +75,14 @@ public class FrameGame extends BaseFrame implements MoveResultListener {
         gameMap.getGameMap().getGameCollection().moveObject(direction, objectType);
     }
     private void gameOver(String message) {
+        endOfGame = true;
         MessageManager.showInformMessage(null, message);
         closeFrame();
     }
 
     @Override
-    public void notifyActionResult(ActionResult actionResult, Goldman goldman) {
+    public void notifyActionResult(ActionResult actionResult, AbstractMovingObject movingObject) {
+        Goldman goldman = (Goldman) movingObject;
         switch (actionResult) {
             case MOVE:
                 labelTurnsLeft.setText(String.valueOf(gameMap.getGameMap().getTimeLimit() - goldman.getTurnsNumber()));
@@ -89,6 +103,7 @@ public class FrameGame extends BaseFrame implements MoveResultListener {
     }
 
     private void initComponents() {
+        endOfGame = false;
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         menuBar1 = new JMenuBar();

@@ -2,6 +2,7 @@ package com.kirilo.game.gui.maps;
 
 import com.kirilo.game.abstracts.AbstractGameMap;
 import com.kirilo.game.abstracts.AbstractGameObject;
+import com.kirilo.game.abstracts.AbstractMovingObject;
 import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.LocationType;
@@ -9,7 +10,6 @@ import com.kirilo.game.interfaces.collections.GameCollection;
 import com.kirilo.game.interfaces.listeners.MoveResultListener;
 import com.kirilo.game.interfaces.maps.DrawableMap;
 import com.kirilo.game.objects.Coordinate;
-import com.kirilo.game.objects.Goldman;
 import com.kirilo.game.objects.Nothing;
 import com.kirilo.game.objects.Wall;
 import com.kirilo.game.objects.creators.MapCreator;
@@ -134,7 +134,7 @@ public class JTableGameMap implements DrawableMap {
         }
 
         @Override
-        public void notifyActionResult(ActionResult actionResult, Goldman goldman) {
+        public void notifyActionResult(ActionResult actionResult, AbstractMovingObject movingObject) {
             switch (actionResult) {
                 case DIE:
                 case WIN:

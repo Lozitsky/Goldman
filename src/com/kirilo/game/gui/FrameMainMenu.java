@@ -13,7 +13,6 @@ public class FrameMainMenu extends JFrame {
     private FrameGame frameGame;
     private BaseFrame frameStatus = new FrameStatus();
     private BaseFrame frameSavedGames = new FrameSavedGames();
-//    private static final JTableGameMap gameMap = new JTableGameMap(LocationType.FS, "resources/game.map", new MapCollection());
 
     public FrameMainMenu() throws HeadlessException {
         initComponents();
@@ -21,6 +20,7 @@ public class FrameMainMenu extends JFrame {
     }
 
     private void jbtnNewGameActionPerformed(ActionEvent e) {
+        FrameGame.setEndOfGame(false);
         if (frameGame == null) {
             frameGame = new FrameGame();
         }
