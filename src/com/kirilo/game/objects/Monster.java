@@ -5,7 +5,7 @@ import com.kirilo.game.abstracts.AbstractMovingObject;
 import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
-import com.kirilo.game.interfaces.SoundObject;
+import com.kirilo.game.interfaces.sound.SoundObject;
 
 public class Monster extends AbstractMovingObject implements SoundObject {
 

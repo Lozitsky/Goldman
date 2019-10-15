@@ -5,7 +5,7 @@ import com.kirilo.game.abstracts.AbstractMovingObject;
 import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
-import com.kirilo.game.interfaces.SoundObject;
+import com.kirilo.game.interfaces.sound.SoundObject;
 
 public class Goldman extends AbstractMovingObject implements SoundObject {
 
@@ -85,6 +85,10 @@ public class Goldman extends AbstractMovingObject implements SoundObject {
         switch (actionResult) {
             case DIE:
                 return WavPlayer.DIE_WAV;
+            case COLLECT_TREASURE:
+                return "treasure.wav";
+            case WIN:
+                return "win.wav";
         }
         return null;
     }

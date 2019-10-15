@@ -14,7 +14,7 @@ import java.util.*;
 
 public class MapCollection extends MapListenersRecorder {
     public MapCollection() {
-        addMoveListener(new WavPlayer());
+//        addMoveListener(new WavPlayer());
     }
 
     private HashMap<Coordinate, AbstractGameObject> gameObjects = new HashMap<>();

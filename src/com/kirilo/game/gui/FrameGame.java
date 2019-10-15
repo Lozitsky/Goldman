@@ -6,43 +6,46 @@ import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.MovingDirection;
 import com.kirilo.game.interfaces.listeners.MoveResultListener;
 import com.kirilo.game.interfaces.maps.DrawableMap;
+import com.kirilo.game.interfaces.sound.SoundPlayer;
 import com.kirilo.game.objects.Goldman;
+import com.kirilo.game.objects.movesrategies.AgressiveMoving;
 import com.kirilo.game.utils.MessageManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class FrameGame extends BaseFrame implements MoveResultListener {
 
     private static final String DIE_MESSAGE = "Game Over!";
     private static final String WIN_MESSAGE = "You are win! Your score: ";
-
-    private static boolean endOfGame;
-
-    public static boolean isEndOfGame() {
-        return endOfGame;
-    }
-
-    public static void setEndOfGame(boolean endOfGame) {
-        FrameGame.endOfGame = endOfGame;
-    }
-
-    //    private GameMap gameMap = new FSGameMap();
+    private SoundPlayer soundPlayer;
+    private TimeMover timeMover;
     private DrawableMap gameMap;
 
     public FrameGame() throws HeadlessException {
         initComponents();
-//        gameMap.loadMap(getClass().getClassLoader().getResource("/game.map"));
     }
 
-    public void setGameMap(DrawableMap gameMap) {
+    @Override
+    protected void closeFrame() {
+        super.closeFrame();
+        soundPlayer.stopBackgroundMusic();
+    }
+
+    public void setGameMap(DrawableMap gameMap, SoundPlayer soundPlayer) {
         this.gameMap = gameMap;
         gameMap.drawMap();
+
+        this.soundPlayer = soundPlayer;
+        this.soundPlayer.startBackgroundMusic("background.wav");
+        gameMap.getGameMap().getGameCollection().addMoveListener(soundPlayer);
         gameMap.getGameMap().getGameCollection().addMoveListener(this);
         labelTurnsLeft.setText(String.valueOf(gameMap.getGameMap().getTimeLimit()));
         panelMap.removeAll();
         panelMap.add(gameMap.getMap());
+        timeMover = new TimeMover();
     }
 
 
@@ -75,14 +78,21 @@ public class FrameGame extends BaseFrame implements MoveResultListener {
         gameMap.getGameMap().getGameCollection().moveObject(direction, objectType);
     }
     private void gameOver(String message) {
-        endOfGame = true;
         MessageManager.showInformMessage(null, message);
         closeFrame();
     }
 
     @Override
     public void notifyActionResult(ActionResult actionResult, AbstractMovingObject movingObject) {
-        Goldman goldman = (Goldman) movingObject;
+        if (movingObject.getType().equals(GameObjectType.GOLDMAN)) {
+            Goldman goldman = (Goldman) movingObject;
+            checkGoldManAction(actionResult, goldman);
+        }
+
+        gameMap.drawMap();
+    }
+
+    private void checkGoldManAction(ActionResult actionResult, Goldman goldman) {
         switch (actionResult) {
             case MOVE:
                 labelTurnsLeft.setText(String.valueOf(gameMap.getGameMap().getTimeLimit() - goldman.getTurnsNumber()));
@@ -90,20 +100,56 @@ public class FrameGame extends BaseFrame implements MoveResultListener {
                     break;
                 }
             case DIE:
+                timeMover.stop();
+                soundPlayer.stopBackgroundMusic();
                 gameOver(DIE_MESSAGE);
                 break;
             case WIN:
+                timeMover.stop();
+                soundPlayer.stopBackgroundMusic();
                 gameOver(WIN_MESSAGE + goldman.getTotalScore());
             case COLLECT_TREASURE:
                 labelScore.setText(String.valueOf(goldman.getTotalScore()));
                 break;
         }
+    }
 
-        gameMap.drawMap();
+    private class TimeMover implements ActionListener, MoveResultListener {
+        private Timer timer;
+        private final static int MOVING_PAUSE = 500;
+        private static final int INIT_PAUSE = 1000;
+
+        private TimeMover() {
+            timer = new Timer(MOVING_PAUSE, this);
+            timer.setInitialDelay(INIT_PAUSE);
+            timer.start();
+            gameMap.getGameMap().getGameCollection().addMoveListener(this);
+        }
+
+        public void start() {
+            timer.start();
+        }
+        public void stop() {
+            timer.stop();
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            gameMap.getGameMap().getGameCollection().moveObject(new AgressiveMoving(),GameObjectType.MONSTER);
+        }
+
+        @Override
+        public void notifyActionResult(ActionResult actionResult, AbstractMovingObject movingObject) {
+            switch (actionResult) {
+/*                case DIE:
+                case WIN:
+                    timer.stop();
+                    break;*/
+            }
+        }
     }
 
     private void initComponents() {
-        endOfGame = false;
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         // Generated using JFormDesigner Evaluation license - unknown
         menuBar1 = new JMenuBar();

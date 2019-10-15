@@ -1,5 +1,6 @@
 package com.kirilo.game.gui;
 
+import com.kirilo.game.objects.WavPlayer;
 import com.kirilo.game.objects.maps.MapCollection;
 import com.kirilo.game.enums.LocationType;
 import com.kirilo.game.gui.maps.JTableGameMap;
@@ -20,12 +21,11 @@ public class FrameMainMenu extends JFrame {
     }
 
     private void jbtnNewGameActionPerformed(ActionEvent e) {
-        FrameGame.setEndOfGame(false);
         if (frameGame == null) {
             frameGame = new FrameGame();
         }
 
-        frameGame.setGameMap(new JTableGameMap(LocationType.FS, "resources/game.map", new MapCollection()));
+        frameGame.setGameMap(new JTableGameMap(LocationType.FS, "resources/game.map", new MapCollection()), new WavPlayer());
         frameGame.showFrame(this);
     }
 

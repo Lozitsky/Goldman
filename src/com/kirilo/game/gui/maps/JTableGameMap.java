@@ -2,31 +2,24 @@ package com.kirilo.game.gui.maps;
 
 import com.kirilo.game.abstracts.AbstractGameMap;
 import com.kirilo.game.abstracts.AbstractGameObject;
-import com.kirilo.game.abstracts.AbstractMovingObject;
-import com.kirilo.game.enums.ActionResult;
 import com.kirilo.game.enums.GameObjectType;
 import com.kirilo.game.enums.LocationType;
 import com.kirilo.game.interfaces.collections.GameCollection;
-import com.kirilo.game.interfaces.listeners.MoveResultListener;
 import com.kirilo.game.interfaces.maps.DrawableMap;
 import com.kirilo.game.objects.Coordinate;
 import com.kirilo.game.objects.Nothing;
 import com.kirilo.game.objects.Wall;
 import com.kirilo.game.objects.creators.MapCreator;
-import com.kirilo.game.objects.movesrategies.AgressiveMoving;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 public class JTableGameMap implements DrawableMap {
     private JTable table = new JTable();
     private AbstractGameMap gameMap;
-    private String[] columnNames;
     private AbstractGameObject[][] gameObjects;
 
     public JTableGameMap(LocationType type, Object source, GameCollection gameCollection) {
@@ -44,7 +37,7 @@ public class JTableGameMap implements DrawableMap {
 
         gameMap.loadMap(source);
 
-        timeMover = new TimeMover();
+//        timeMover = new TimeMover();
     }
 
     private void fillEmptyMap(int width, int height) {
@@ -78,7 +71,7 @@ public class JTableGameMap implements DrawableMap {
         updateObjectsArray();
 
         try {
-            columnNames = new String[gameMap.getWidth()];
+            String[] columnNames = new String[gameMap.getWidth()];
             Arrays.fill(columnNames, "");
             table.setModel(new DefaultTableModel(gameObjects, columnNames));
             for (int i = 0; i < table.getColumnCount(); i++) {
@@ -101,46 +94,5 @@ public class JTableGameMap implements DrawableMap {
     @Override
     public AbstractGameMap getGameMap() {
         return gameMap;
-    }
-
-    public TimeMover getTimeMover() {
-        return timeMover;
-    }
-
-    private TimeMover timeMover;
-
-    private class TimeMover implements ActionListener, MoveResultListener {
-        private Timer timer;
-        private final static int MOVING_PAUSE = 500;
-        private static final int INIT_PAUSE = 1000;
-
-        private TimeMover() {
-            timer = new Timer(MOVING_PAUSE, this);
-            timer.setInitialDelay(INIT_PAUSE);
-            timer.start();
-            gameMap.getGameCollection().addMoveListener(this);
-        }
-
-        public void start() {
-            timer.start();
-        }
-        public void stop() {
-            timer.stop();
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            gameMap.getGameCollection().moveObject(new AgressiveMoving(),GameObjectType.MONSTER);
-        }
-
-        @Override
-        public void notifyActionResult(ActionResult actionResult, AbstractMovingObject movingObject) {
-            switch (actionResult) {
-                case DIE:
-                case WIN:
-                    timer.stop();
-                    break;
-            }
-        }
     }
 }
